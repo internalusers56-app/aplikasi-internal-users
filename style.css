@@ -5,11 +5,17 @@
   --accent-azure: #3b82f6;
 }
 
-/* Reset margin dan padding untuk menghilangkan semua spasi */
+/* RESET TOTAL - HILANGKAN SEMUA MARGIN, PADDING, DAN GAP */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  gap: 0 !important;
 }
 
 /* Font & base */
@@ -17,11 +23,9 @@ html, body {
   font-family: 'Inter', sans-serif;
   background-color: var(--pearl-white);
   color: #111827;
-  margin: 0;
-  padding: 0;
 }
 
-/* Sidebar states */
+/* Sidebar states - ZERO GAP dengan main content */
 .sidebar-expanded {
   width: 260px;
 }
@@ -75,9 +79,11 @@ html, body {
   100% { transform: scale(1); }
 }
 
-/* HILANGKAN SEMUA SPASI ANTARA SIDEBAR DAN CONTENT */
+/* ZERO GAP LAYOUT - SIDEBAR DAN MAIN CONTENT BERPADU TANPA CELAH */
 #app {
   gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 #main-content {
@@ -86,8 +92,18 @@ html, body {
   width: 100%;
 }
 
-/* Untuk desktop - sidebar dan content berhimpit tanpa spasi */
+/* Desktop: Sidebar dan Main Content benar-benar menempel */
 @media (min-width: 1024px) {
+  #app {
+    display: flex;
+    gap: 0 !important;
+  }
+  
+  #app-sidebar {
+    margin: 0;
+    padding: 0;
+  }
+  
   #main-content.sidebar-expanded {
     margin-left: 260px;
     width: calc(100% - 260px);
@@ -98,24 +114,25 @@ html, body {
     width: calc(100% - 80px);
   }
   
-  /* Pastikan header dan content tidak ada padding/margin yang menambah spasi */
+  /* Pastikan header tidak ada jarak dengan sidebar */
   #app-header {
     margin: 0;
     padding: 0;
+    border: none;
   }
   
   #app-header > div {
-    padding-left: 0;
-    padding-right: 1rem;
+    padding: 12px 16px;
   }
   
+  /* Content langsung menempel dengan header */
   #app-content {
-    padding-top: 0;
     margin-top: 0;
+    padding-top: 0;
   }
 }
 
-/* Responsive sidebar overlay - TANPA SPASI */
+/* Mobile: Sidebar overlay tanpa mempengaruhi layout utama */
 @media (max-width: 1024px) {
   #app-sidebar {
     position: fixed;
@@ -137,8 +154,6 @@ html, body {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    margin: 0;
-    padding: 0;
   }
   
   #app-overlay.active {
@@ -182,13 +197,18 @@ button:hover, a:hover {
   transform: translateY(-1px);
 }
 
-/* Pastikan tidak ada gap antara elemen */
-#app-header, #app-content, #app-sidebar {
+/* Pastikan tidak ada gap antara elemen manapun */
+#app-header, #app-content, #app-sidebar, #main-content {
   gap: 0;
   margin: 0;
+  border: none;
 }
 
-/* Hilangkan border yang menambah visual spacing */
+/* Hilangkan semua border yang menciptakan ilusi jarak */
 #app-header {
-  border: none;
+  border: none !important;
+}
+
+#app-sidebar {
+  border: none !important;
 }
