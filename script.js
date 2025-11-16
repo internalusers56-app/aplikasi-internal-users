@@ -8,7 +8,7 @@ const menuAdminToggle = document.getElementById('menu-admin-toggle');
 const submenuAdmin = document.getElementById('submenu-admin');
 const chevronAdmin = document.getElementById('chevron-admin');
 
-// Sidebar toggle (desktop)
+// Toggle sidebar (desktop)
 function setSidebarCollapsed(collapsed) {
   if (collapsed) {
     sidebar.classList.add('sidebar-collapsed', 'collapsed');
@@ -28,10 +28,9 @@ btnSidebarToggle.addEventListener('click', () => {
   setSidebarCollapsed(!isCollapsed);
 });
 
-// Mobile open/close sidebar (overlay)
+// Toggle sidebar (mobile)
 btnMobileMenu.addEventListener('click', () => {
   app.classList.toggle('overlay-show');
-  // On mobile, show expanded
   setSidebarCollapsed(false);
 });
 
@@ -39,7 +38,7 @@ overlay.addEventListener('click', () => {
   app.classList.remove('overlay-show');
 });
 
-// Dropdown Administrasi
+// Dropdown toggle
 menuAdminToggle.addEventListener('click', () => {
   const open = menuAdminToggle.getAttribute('data-open') === 'true';
   menuAdminToggle.setAttribute('data-open', (!open).toString());
@@ -49,7 +48,7 @@ menuAdminToggle.addEventListener('click', () => {
   chevronAdmin.classList.toggle('rotate-90', !open);
 });
 
-// Demo SPA router (hash-based)
+// SPA routing
 const routes = {
   '#/dashboard': { title: 'Dashboard', desc: 'Ringkasan aktivitas terbaru dan metrik utama.' },
   '#/todolist': { title: 'Todolist', desc: 'Kelola tugas harian, prioritas, dan progres.' },
@@ -72,13 +71,13 @@ function renderRoute() {
   const route = routes[key] || routes['#/dashboard'];
   contentTitle.textContent = route.title;
   contentDesc.textContent = route.desc;
-  document.getElementById('header-title').textContent = 'Overview';
+  document.getElementById('header-title').textContent = route.title;
 }
 
 window.addEventListener('hashchange', renderRoute);
 window.addEventListener('DOMContentLoaded', renderRoute);
 
-// Demo notification badge increment
+// Notification badge demo
 const btnNotif = document.getElementById('btn-notif');
 const notifBadge = document.getElementById('notif-badge');
 btnNotif.addEventListener('click', () => {
@@ -86,7 +85,7 @@ btnNotif.addEventListener('click', () => {
   notifBadge.textContent = String(val + 1);
 });
 
-// Logout handler (placeholder)
+// Logout demo
 document.getElementById('menu-logout').addEventListener('click', () => {
   alert('Log out clicked — implement auth signout here.');
 });
