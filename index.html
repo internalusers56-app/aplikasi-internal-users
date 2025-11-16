@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — Responsive Template</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen">
+  <!-- App root -->
+  <div id="app" class="flex min-h-screen bg-[var(--pearl-white)]">
+
+    <!-- Overlay (mobile) -->
+    <div id="app-overlay" class="fixed inset-0 bg-black/40 transition-base" aria-hidden="true"></div>
+
+    <!-- Sidebar kiri -->
+    <aside
+      id="app-sidebar"
+      class="thin-scrollbar sidebar-expanded collapsed lg:sidebar-expanded bg-[var(--navy-900)] text-white transition-base flex flex-col"
+      data-state="expanded"
+      aria-label="Sidebar navigasi"
+    >
+      <!-- Sidebar header -->
+      <div class="flex items-center justify-between px-4 py-4 border-b border-white/10">
+        <button id="btn-sidebar-toggle"
+          class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base"
+          aria-controls="app-sidebar"
+          aria-expanded="true">
+          <i class="fa-solid fa-bars text-xl"></i>
+          <span class="menu-text text-sm font-semibold">Toggle Menu</span>
+        </button>
+        <a href="#/dashboard" class="hidden lg:flex items-center gap-2 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+          <i class="fa-solid fa-gauge-high text-xl"></i>
+          <span class="menu-text text-sm font-semibold">Dashboard</span>
+        </a>
+      </div>
+
+      <!-- Sidebar menu utama -->
+      <nav id="menu-main" class="mt-2 px-2 pb-6 overflow-y-auto" aria-label="Menu utama">
+        <ul class="space-y-1">
+          <li>
+            <a id="menu-dashboard" href="#/dashboard"
+               class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+              <i class="fa-solid fa-gauge-high w-6 text-lg"></i>
+              <span class="menu-text text-sm font-medium">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a id="menu-todolist" href="#/todolist"
+               class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+              <i class="fa-solid fa-list-check w-6 text-lg"></i>
+              <span class="menu-text text-sm font-medium">Todolist</span>
+            </a>
+          </li>
+          <li>
+            <a id="menu-marketing-plan" href="#/marketing-plan"
+               class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+              <i class="fa-solid fa-chart-line w-6 text-lg"></i>
+              <span class="menu-text text-sm font-medium">Marketing Plan</span>
+            </a>
+          </li>
+          <li>
+            <a id="menu-register-aplikasi" href="#/register-aplikasi"
+               class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+              <i class="fa-solid fa-clipboard-check w-6 text-lg"></i>
+              <span class="menu-text text-sm font-medium">Register Aplikasi</span>
+            </a>
+          </li>
+          <li>
+            <a id="menu-pengiriman-polis" href="#/pengiriman-polis"
+               class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+              <i class="fa-solid fa-truck-fast w-6 text-lg"></i>
+              <span class="menu-text text-sm font-medium">Pengiriman Polis</span>
+            </a>
+          </li>
+          <li>
+            <a id="menu-register-klaim" href="#/register-klaim"
+               class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+              <i class="fa-solid fa-file-shield w-6 text-lg"></i>
+              <span class="menu-text text-sm font-medium">Register Klaim</span>
+            </a>
+          </li>
+
+          <!-- Dropdown Administrasi -->
+          <li>
+            <button id="menu-admin-toggle"
+                    class="w-full flex items-center justify-between gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base"
+                    aria-controls="submenu-admin"
+                    aria-expanded="false"
+                    data-open="false">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-sliders w-6 text-lg"></i>
+                <span class="menu-text text-sm font-medium">Administrasi</span>
+              </div>
+              <i id="chevron-admin" class="fa-solid fa-chevron-right text-xs rotate-0"></i>
+            </button>
+            <ul id="submenu-admin" class="mt-1 pl-4 space-y-1 hidden" aria-label="Submenu Administrasi">
+              <li>
+                <a id="submenu-users" href="#/admin/users"
+                   class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+                  <i class="fa-solid fa-user-gear w-6 text-lg"></i>
+                  <span class="menu-text text-sm">Pengaturan Users</span>
+                </a>
+              </li>
+              <li>
+                <a id="submenu-roles" href="#/admin/roles"
+                   class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+                  <i class="fa-solid fa-shield-halved w-6 text-lg"></i>
+                  <span class="menu-text text-sm">Pengaturan Roles</span>
+                </a>
+              </li>
+              <li>
+                <a id="submenu-menus" href="#/admin/menus"
+                   class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+                  <i class="fa-solid fa-bars-staggered w-6 text-lg"></i>
+                  <span class="menu-text text-sm">Pengaturan Menus</span>
+                </a>
+              </li>
+              <li>
+                <a id="submenu-marketing" href="#/admin/marketing"
+                   class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+                  <i class="fa-solid fa-bullhorn w-6 text-lg"></i>
+                  <span class="menu-text text-sm">Pengaturan Marketing</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Profile & Logout -->
+          <li class="pt-2 border-t border-white/10 mt-2">
+            <a id="menu-profile" href="#/profile"
+               class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+              <i class="fa-solid fa-user-circle w-6 text-lg"></i>
+              <span class="menu-text text-sm font-medium">Profile</span>
+            </a>
+          </li>
+          <li>
+            <button id="menu-logout"
+               class="w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 transition-base">
+              <i class="fa-solid fa-right-from-bracket w-6 text-lg"></i>
+              <span class="menu-text text-sm font-medium">Log Out</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Area utama -->
+    <div class="flex-1 flex flex-col min-w-0">
+      <!-- Header atas (judul halaman) -->
+      <header id="app-header" class="bg-[var(--navy-900)] text-white border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 lg:px-6 py-3">
+          <div class="flex items-center justify-between gap-4">
+            <!-- Kiri: user info -->
+            <div id="header-user" class="flex items-center gap-3">
+              <div class="relative">
+                <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[var(--navy-800)] ring-2 ring-white/20">
+                  <i class="fa-solid fa-user text-white"></i>
+                </span>
+                <span class="absolute -right-1 -bottom-1 h-3 w-3 rounded-full bg-green-500 ring-2 ring-[var(--navy-900)]" title="Active"></span>
+              </div>
+              <div>
+                <div id="user-fullname" class="text-sm font-semibold">Admin Internal</div>
+                <div id="user-role" class="text-xs text-white/80">Administrator</div>
+              </div>
+            </div>
+
+            <!-- Kanan: judul + notifikasi + mobile toggle -->
+            <div class="flex items-center gap-4">
+              <div id="header-title" class="text-sm lg:text-base font-semibold">Overview</div>
+              <button id="btn-notif" class="relative p-2 rounded-md hover:bg-white/10 transition-base" aria-label="Notifikasi">
+                <i class="fa-regular fa-bell text-lg"></i>
+                <span id="notif-badge" class="absolute -top-1 -right-1 bg-blue-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">3</span>
+              </button>
+              <button id="btn-mobile-menu"
+                      class="lg:hidden p-2 rounded-md hover:bg-white/10 transition-base"
+                      aria-label="Toggle Sidebar">
+                <i class="fa-solid fa-bars text-lg"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Konten dinamis (SPA mount) -->
+      <main id="app-content" class="flex-1 bg-[var(--pearl-white)]">
+        <div class="max-w-7xl mx-auto px-4 lg:px-6 py-6">
+          <section id="content-router" class="rounded-xl bg-white shadow-sm border border-slate-200/60">
+            <div class="p-6">
+              <h2 id="content-title" class="text-lg font-semibold text-slate-800">Selamat datang di Dashboard</h2>
+              <p id="content-description" class="mt-1 text-sm text-slate-600">
+                Gunakan menu di sidebar untuk navigasi. Area ini akan menampilkan konten dinamis SPA sesuai route.
+              </p>
+
+              <!-- Demo cards -->
+              <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <article class="p-4 rounded-lg border bg-white hover:shadow-md transition-base">
+                  <div class="flex items-center gap-2 text-slate-700">
+                    <i class="fa-solid fa-list-check text-blue-500"></i>
+                    <span class="text-sm font-semibold">Tugas aktif</span>
+                  </div>
+                  <div class="mt-2 text-2xl font-bold text-slate-900" id="stat-tugas">12</div>
+                </article>
+                <article class="p-4 rounded-lg border bg-white hover:shadow-md transition-base">
+                  <div class="flex items-center gap-2 text-slate-700">
+                    <i class="fa-solid fa-chart-line text-blue-500"></i>
+                    <span class="text-sm font-semibold">Konversi</span>
+                  </div>
+                  <div class="mt-2 text-2xl font-bold text-slate-900" id="stat-konversi">4.8%</div>
+                </article>
+                <article class="p-4 rounded-lg border bg-white hover:shadow-md transition-base">
+                  <div class="flex items-center gap-2 text-slate-700">
+                    <i class="fa-solid fa-truck-fast text-blue-500"></i>
+                    <span class="text-sm font-semibold">Pengiriman</span>
+                  </div>
+                  <div class="mt-2 text-2xl font-bold text-slate-900" id="stat-pengiriman">24</div>
+                </article>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- App scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
