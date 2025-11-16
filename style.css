@@ -5,17 +5,29 @@
   --accent-azure: #3b82f6;
 }
 
-/* RESET TOTAL - HILANGKAN SEMUA MARGIN, PADDING, DAN GAP */
+/* RESET RADICAL - HILANGKAN SEMUA GAP POTENSIAL */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  border: 0;
+  outline: 0;
 }
 
-html, body, #app {
+html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#app {
+  margin: 0 !important;
+  padding: 0 !important;
   gap: 0 !important;
+  width: 100%;
+  min-height: 100vh;
 }
 
 /* Font & base */
@@ -23,12 +35,21 @@ html, body {
   font-family: 'Inter', sans-serif;
   background-color: var(--pearl-white);
   color: #111827;
+  line-height: 1;
 }
 
-/* Sidebar states - ZERO GAP dengan main content */
+/* Sidebar - TANPA GAP SEDIKITPUN */
+#app-sidebar {
+  flex-shrink: 0;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
 .sidebar-expanded {
   width: 260px;
 }
+
 .sidebar-collapsed {
   width: 80px;
 }
@@ -40,6 +61,7 @@ html, body {
   transform: translateX(0);
   transition: opacity 180ms ease, transform 180ms ease;
 }
+
 .collapsed .menu-text {
   opacity: 0;
   transform: translateX(-8px);
@@ -61,9 +83,11 @@ html, body {
   scrollbar-width: thin;
   scrollbar-color: #334155 transparent;
 }
+
 .thin-scrollbar::-webkit-scrollbar {
   width: 8px;
 }
+
 .thin-scrollbar::-webkit-scrollbar-thumb {
   background: #334155;
   border-radius: 8px;
@@ -73,37 +97,44 @@ html, body {
 .badge-pulse {
   animation: pulse 1.8s ease-in-out infinite;
 }
+
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
 
-/* ZERO GAP LAYOUT - SIDEBAR DAN MAIN CONTENT BERPADU TANPA CELAH */
-#app {
-  gap: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
+/* MAIN CONTENT - ZERO GAP DENGAN SIDEBAR */
 #main-content {
-  margin-left: 0;
-  transition: margin-left 0.3s ease;
+  margin: 0;
+  padding: 0;
   width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 
-/* Desktop: Sidebar dan Main Content benar-benar menempel */
+/* Desktop: Sidebar dan Main Content MENYENTUH tanpa celah */
 @media (min-width: 1024px) {
   #app {
     display: flex;
-    gap: 0 !important;
+    margin: 0;
+    padding: 0;
+    gap: 0;
   }
   
   #app-sidebar {
+    position: relative;
     margin: 0;
     padding: 0;
+    transform: none !important;
   }
   
+  #main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  /* PERHITUNGAN YANG PRESISI - TANPA GAP */
   #main-content.sidebar-expanded {
     margin-left: 260px;
     width: calc(100% - 260px);
@@ -114,33 +145,34 @@ html, body {
     width: calc(100% - 80px);
   }
   
-  /* Pastikan header tidak ada jarak dengan sidebar */
+  /* Header langsung menempel dengan sidebar */
   #app-header {
     margin: 0;
     padding: 0;
-    border: none;
+    width: 100%;
   }
   
   #app-header > div {
     padding: 12px 16px;
+    margin: 0;
   }
   
   /* Content langsung menempel dengan header */
   #app-content {
-    margin-top: 0;
-    padding-top: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
   }
 }
 
-/* Mobile: Sidebar overlay tanpa mempengaruhi layout utama */
-@media (max-width: 1024px) {
+/* Mobile: Sidebar menjadi overlay */
+@media (max-width: 1023px) {
   #app-sidebar {
     position: fixed;
-    z-index: 40;
-    height: 100vh;
     top: 0;
     left: 0;
     transform: translateX(-100%);
+    z-index: 40;
     margin: 0;
     padding: 0;
   }
@@ -170,11 +202,27 @@ html, body {
     transform: translateX(0);
   }
   
-  /* Di mobile, main content full width tanpa margin */
+  /* Di mobile, main content full width */
   #main-content {
     width: 100% !important;
     margin-left: 0 !important;
   }
+}
+
+/* HILANGKAN SEMUA BORDER DAN OUTLINE YANG MEMBUAT GAP */
+#app-header {
+  border: none !important;
+  outline: none !important;
+}
+
+#app-sidebar {
+  border: none !important;
+  outline: none !important;
+}
+
+#main-content {
+  border: none !important;
+  outline: none !important;
 }
 
 /* Smooth transitions */
@@ -197,18 +245,15 @@ button:hover, a:hover {
   transform: translateY(-1px);
 }
 
-/* Pastikan tidak ada gap antara elemen manapun */
-#app-header, #app-content, #app-sidebar, #main-content {
-  gap: 0;
-  margin: 0;
-  border: none;
+/* FIX UNTUK FLEXBOX GAP YANG TERSEMBUNYI */
+#app {
+  gap: 0 !important;
+  row-gap: 0 !important;
+  column-gap: 0 !important;
 }
 
-/* Hilangkan semua border yang menciptakan ilusi jarak */
-#app-header {
-  border: none !important;
-}
-
-#app-sidebar {
-  border: none !important;
+/* HILANGKAN SEMUA WHITESPACE DAN LINE-HEIGHT YANG MEMBUAT GAP */
+#app > * {
+  line-height: 1;
+  vertical-align: top;
 }
