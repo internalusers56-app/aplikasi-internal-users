@@ -1,634 +1,563 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Sample data
-    let applications = [
+    const sampleData = [
         {
             id: 1,
-            tanggal: '2023-06-15',
-            type_business: 'New Business',
-            id_marketing: '1',
-            segment: 'Corporate',
-            request_type: 'Bank',
-            request_name: 'John Doe',
-            uraian: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl',
-            ex_polis: 'EX123456',
-            'no-request': 'REQ789',
-            no_polis: 'POL456',
-            status: 'Realisasi',
-            keterangan: 'Semua dokumen sudah lengkap dan telah diverifikasi',
-            created_at: '2023-06-15 10:30:00',
-            updated_at: '2023-06-15 14:45:00'
+            tanggal: "2023-06-20",
+            type_business: "New Business",
+            id_marketing: 1,
+            segment: "Corporate",
+            request_type: "Bank",
+            request_name: "PT. Sejahtera Bersama",
+            uraian: "Aplikasi asuransi untuk kantor pusat dan cabang",
+            ex_polis: "POL-2022-001",
+            no_request: "REQ-2023-001",
+            no_polis: "POL-2023-001",
+            status: "Realisasi",
+            keterangan: "Disetujui dengan catatan",
+            created_at: "2023-06-20 09:00:00",
+            updated_at: "2023-06-22 14:30:00"
         },
         {
             id: 2,
-            tanggal: '2023-06-16',
-            type_business: 'Endorsment',
-            id_marketing: '2',
-            segment: 'Retail',
-            request_type: 'General Retail',
-            request_name: 'Jane Smith',
-            uraian: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-            ex_polis: 'EX234567',
-            'no-request': 'REQ790',
-            no_polis: 'POL567',
-            status: 'Pending',
-            keterangan: 'Menunggu persetujuan dari manajemen',
-            created_at: '2023-06-16 09:15:00',
-            updated_at: '2023-06-16 11:20:00'
+            tanggal: "2023-06-21",
+            type_business: "Endorsment",
+            id_marketing: 2,
+            segment: "Retail",
+            request_type: "Agent",
+            request_name: "Budi Santoso",
+            uraian: "Perubahan alamat tertanggung",
+            ex_polis: "POL-2023-015",
+            no_request: "REQ-2023-002",
+            no_polis: "POL-2023-015",
+            status: "Pending",
+            keterangan: "Menunggu dokumen lengkap",
+            created_at: "2023-06-21 10:30:00",
+            updated_at: "2023-06-21 10:30:00"
         },
         {
             id: 3,
-            tanggal: '2023-06-17',
-            type_business: 'Renewal',
-            id_marketing: '3',
-            segment: 'Corporate',
-            request_type: 'Broker',
-            request_name: 'Robert Johnson',
-            uraian: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
-            ex_polis: 'EX345678',
-            'no-request': 'REQ791',
-            no_polis: 'POL678',
-            status: 'Batal',
-            keterangan: 'Permintaan dibatalkan oleh klien',
-            created_at: '2023-06-17 13:45:00',
-            updated_at: '2023-06-17 16:30:00'
+            tanggal: "2023-06-19",
+            type_business: "Renewal",
+            id_marketing: 3,
+            segment: "Corporate",
+            request_type: "Broker",
+            request_name: "PT. Maju Jaya",
+            uraian: "Perpanjangan polis asuransi kendaraan",
+            ex_polis: "POL-2022-045",
+            no_request: "REQ-2023-003",
+            no_polis: "",
+            status: "Batal",
+            keterangan: "Permintaan dibatalkan oleh klien",
+            created_at: "2023-06-19 13:45:00",
+            updated_at: "2023-06-20 09:15:00"
         },
         {
             id: 4,
-            tanggal: '2023-06-18',
-            type_business: 'New Business',
-            id_marketing: '4',
-            segment: 'Retail',
-            request_type: 'Agent',
-            request_name: 'Emily Wilson',
-            uraian: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
-            ex_polis: 'EX456789',
-            'no-request': 'REQ792',
-            no_polis: 'POL789',
-            status: 'Realisasi',
-            keterangan: 'Proses selesai, polis telah diterbitkan',
-            created_at: '2023-06-18 08:00:00',
-            updated_at: '2023-06-18 12:15:00'
+            tanggal: "2023-06-18",
+            type_business: "New Business",
+            id_marketing: 4,
+            segment: "Retail",
+            request_type: "General Retail",
+            request_name: "Siti Nurhaliza",
+            uraian: "Asuransi kesehatan individu",
+            ex_polis: "",
+            no_request: "REQ-2023-004",
+            no_polis: "POL-2023-020",
+            status: "Realisasi",
+            keterangan: "Polis sudah terbit",
+            created_at: "2023-06-18 11:20:00",
+            updated_at: "2023-06-21 16:45:00"
         },
         {
             id: 5,
-            tanggal: '2023-06-19',
-            type_business: 'Endorsment',
-            id_marketing: '1',
-            segment: 'Corporate',
-            request_type: 'Leasing',
-            request_name: 'Michael Brown',
-            uraian: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium',
-            ex_polis: 'EX567890',
-            'no-request': 'REQ793',
-            no_polis: 'POL890',
-            status: 'Pending',
-            keterangan: 'Dokumen tambahan sedang diproses',
-            created_at: '2023-06-19 11:30:00',
-            updated_at: '2023-06-19 15:45:00'
-        },
-        {
-            id: 6,
-            tanggal: '2023-06-20',
-            type_business: 'Renewal',
-            id_marketing: '2',
-            segment: 'Retail',
-            request_type: 'Bank',
-            request_name: 'Sarah Davis',
-            uraian: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos',
-            ex_polis: 'EX678901',
-            'no-request': 'REQ794',
-            no_polis: 'POL901',
-            status: 'Realisasi',
-            keterangan: 'Pembayaran telah dikonfirmasi',
-            created_at: '2023-06-20 10:00:00',
-            updated_at: '2023-06-20 14:30:00'
-        },
-        {
-            id: 7,
-            tanggal: '2023-06-21',
-            type_business: 'New Business',
-            id_marketing: '3',
-            segment: 'Corporate',
-            request_type: 'General Corporate',
-            request_name: 'David Miller',
-            uraian: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti',
-            ex_polis: 'EX789012',
-            'no-request': 'REQ795',
-            no_polis: 'POL012',
-            status: 'Pending',
-            keterangan: 'Menunggu verifikasi data dari klien',
-            created_at: '2023-06-21 09:15:00',
-            updated_at: '2023-06-21 13:20:00'
-        },
-        {
-            id: 8,
-            tanggal: '2023-06-22',
-            type_business: 'Endorsment',
-            id_marketing: '4',
-            segment: 'Retail',
-            request_type: 'Broker',
-            request_name: 'Lisa Anderson',
-            uraian: 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio',
-            ex_polis: 'EX890123',
-            'no-request': 'REQ796',
-            no_polis: 'POL123',
-            status: 'Batal',
-            keterangan: 'Klien tidak melanjutkan proses',
-            created_at: '2023-06-22 14:00:00',
-            updated_at: '2023-06-22 17:30:00'
-        },
-        {
-            id: 9,
-            tanggal: '2023-06-23',
-            type_business: 'Renewal',
-            id_marketing: '1',
-            segment: 'Corporate',
-            request_type: 'Agent',
-            request_name: 'James Taylor',
-            uraian: 'Cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga',
-            ex_polis: 'EX901234',
-            'no-request': 'REQ797',
-            no_polis: 'POL234',
-            status: 'Realisasi',
-            keterangan: 'Polis diperpanjang untuk satu tahun',
-            created_at: '2023-06-23 08:30:00',
-            updated_at: '2023-06-23 12:45:00'
-        },
-        {
-            id: 10,
-            tanggal: '2023-06-24',
-            type_business: 'New Business',
-            id_marketing: '2',
-            segment: 'Retail',
-            request_type: 'Leasing',
-            request_name: 'Jennifer Thomas',
-            uraian: 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio',
-            ex_polis: 'EX012345',
-            'no-request': 'REQ798',
-            no_polis: 'POL345',
-            status: 'Pending',
-            keterangan: 'Proses verifikasi sedang berlangsung',
-            created_at: '2023-06-24 11:00:00',
-            updated_at: '2023-06-24 15:15:00'
-        },
-        {
-            id: 11,
-            tanggal: '2023-06-25',
-            type_business: 'Endorsment',
-            id_marketing: '3',
-            segment: 'Corporate',
-            request_type: 'Bank',
-            request_name: 'William Jackson',
-            uraian: 'Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae',
-            ex_polis: 'EX123456',
-            'no-request': 'REQ799',
-            no_polis: 'POL456',
-            status: 'Realisasi',
-            keterangan: 'Perubahan data telah disetujui',
-            created_at: '2023-06-25 10:30:00',
-            updated_at: '2023-06-25 14:45:00'
-        },
-        {
-            id: 12,
-            tanggal: '2023-06-26',
-            type_business: 'Renewal',
-            id_marketing: '4',
-            segment: 'Retail',
-            request_type: 'General Retail',
-            request_name: 'Patricia White',
-            uraian: 'Sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus',
-            ex_polis: 'EX234567',
-            'no-request': 'REQ800',
-            no_polis: 'POL567',
-            status: 'Batal',
-            keterangan: 'Permintaan renewal dibatalkan karena keterlambatan pembayaran',
-            created_at: '2023-06-26 09:45:00',
-            updated_at: '2023-06-26 13:30:00'
+            tanggal: "2023-06-17",
+            type_business: "New Business",
+            id_marketing: 1,
+            segment: "Corporate",
+            request_type: "Leasing",
+            request_name: "PT. Finance Indonesia",
+            uraian: "Asuransi kredit untuk nasabah leasing",
+            ex_polis: "",
+            no_request: "REQ-2023-005",
+            no_polis: "POL-2023-025",
+            status: "Pending",
+            keterangan: "Menunggu persetujuan komite",
+            created_at: "2023-06-17 14:30:00",
+            updated_at: "2023-06-22 10:00:00"
         }
     ];
-
-    // Current page and items per page
+    
+    // Add more sample data to reach 100 records
+    for (let i = 6; i <= 100; i++) {
+        const randomIndex = Math.floor(Math.random() * 5);
+        const randomStatus = ["Realisasi", "Pending", "Batal"][Math.floor(Math.random() * 3)];
+        const randomType = ["New Business", "Endorsment", "Renewal"][Math.floor(Math.random() * 3)];
+        const randomSegment = ["Corporate", "Retail"][Math.floor(Math.random() * 2)];
+        const randomRequestType = ["Bank", "General Corporate", "Broker", "Agent", "General Retail", "Leasing"][Math.floor(Math.random() * 6)];
+        const randomMarketing = Math.floor(Math.random() * 4) + 1;
+        
+        sampleData.push({
+            id: i,
+            tanggal: `2023-06-${i < 10 ? '0' + i : i}`,
+            type_business: randomType,
+            id_marketing: randomMarketing,
+            segment: randomSegment,
+            request_type: randomRequestType,
+            request_name: `Requestor ${i}`,
+            uraian: `Uraian untuk aplikasi ${i}`,
+            ex_polis: i % 3 === 0 ? `POL-2022-${100 + i}` : "",
+            no_request: `REQ-2023-${i < 10 ? '00' + i : i < 100 ? '0' + i : i}`,
+            no_polis: randomStatus === "Realisasi" ? `POL-2023-${100 + i}` : "",
+            status: randomStatus,
+            keterangan: `Keterangan untuk aplikasi ${i}`,
+            created_at: `2023-06-${i < 10 ? '0' + i : i} ${Math.floor(Math.random() * 24)}:${Math.floor(Math.random() * 60)}:00`,
+            updated_at: `2023-06-${i < 10 ? '0' + i : i} ${Math.floor(Math.random() * 24)}:${Math.floor(Math.random() * 60)}:00`
+        });
+    }
+    
+    // Variables
     let currentPage = 1;
-    const itemsPerPage = 10;
-    let filteredApplications = [...applications];
-
+    const recordsPerPage = 10;
+    let filteredData = [...sampleData];
+    let deleteId = null;
+    
     // DOM Elements
-    const tableBody = document.getElementById('table-body');
-    const pagination = document.getElementById('pagination');
-    const searchAllInput = document.getElementById('search-all');
-    const toggleAdvancedSearchBtn = document.getElementById('toggle-advanced-search');
-    const advancedSearchSection = document.getElementById('advanced-search');
-    const applyFilterBtn = document.getElementById('apply-filter');
-    const resetFilterBtn = document.getElementById('reset-filter');
-    const addBtn = document.getElementById('btn-add');
-    const cetakBtn = document.getElementById('btn-cetak');
-    const formModal = new bootstrap.Modal(document.getElementById('formModal'));
-    const viewModal = new bootstrap.Modal(document.getElementById('viewModal'));
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    const applicationForm = document.getElementById('application-form');
-    const saveFormBtn = document.getElementById('save-form');
-    const confirmDeleteBtn = document.getElementById('confirm-delete');
-    const formModalLabel = document.getElementById('formModalLabel');
-    const viewContent = document.getElementById('view-content');
-
-    // Initialize
-    renderTable();
-    updateStats();
-    setupEventListeners();
-
-    // Setup event listeners
-    function setupEventListeners() {
-        // Search functionality
-        searchAllInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            filteredApplications = applications.filter(app => {
-                return Object.values(app).some(value => 
-                    value.toString().toLowerCase().includes(searchTerm)
+    const tableBody = document.getElementById('tableBody');
+    const pageNumbers = document.getElementById('pageNumbers');
+    const startRecord = document.getElementById('startRecord');
+    const endRecord = document.getElementById('endRecord');
+    const totalRecords = document.getElementById('totalRecords');
+    const formModal = document.getElementById('formModal');
+    const viewModal = document.getElementById('viewModal');
+    const deleteModal = document.getElementById('deleteModal');
+    const applicationForm = document.getElementById('applicationForm');
+    const advancedSearch = document.getElementById('advancedSearch');
+    const toggleIcon = document.getElementById('toggleIcon');
+    const viewContent = document.getElementById('viewContent');
+    
+    // Toggle advanced search
+    document.getElementById('toggleAdvancedSearch').addEventListener('click', function() {
+        advancedSearch.classList.toggle('hidden');
+        toggleIcon.classList.toggle('rotate-180');
+    });
+    
+    // Apply filter
+    document.getElementById('applyFilter').addEventListener('click', function() {
+        const dateFrom = document.getElementById('dateFrom').value;
+        const dateTo = document.getElementById('dateTo').value;
+        const statusFilter = document.getElementById('statusFilter').value;
+        const marketingFilter = document.getElementById('marketingFilter').value;
+        const requestorFilter = document.getElementById('requestorFilter').value.toLowerCase();
+        
+        filteredData = sampleData.filter(item => {
+            let matchDate = true;
+            let matchStatus = !statusFilter || item.status === statusFilter;
+            let matchMarketing = !marketingFilter || item.id_marketing == marketingFilter;
+            let matchRequestor = !requestorFilter || item.request_name.toLowerCase().includes(requestorFilter);
+            
+            if (dateFrom && dateTo) {
+                const itemDate = new Date(item.tanggal);
+                const fromDate = new Date(dateFrom);
+                const toDate = new Date(dateTo);
+                matchDate = itemDate >= fromDate && itemDate <= toDate;
+            }
+            
+            return matchDate && matchStatus && matchMarketing && matchRequestor;
+        });
+        
+        currentPage = 1;
+        renderTable();
+    });
+    
+    // Reset filter
+    document.getElementById('resetFilter').addEventListener('click', function() {
+        document.getElementById('dateFrom').value = '';
+        document.getElementById('dateTo').value = '';
+        document.getElementById('statusFilter').value = '';
+        document.getElementById('marketingFilter').value = '';
+        document.getElementById('requestorFilter').value = '';
+        
+        filteredData = [...sampleData];
+        currentPage = 1;
+        renderTable();
+    });
+    
+    // Search all
+    document.getElementById('searchAll').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        if (searchTerm) {
+            filteredData = sampleData.filter(item => {
+                return Object.values(item).some(val => 
+                    String(val).toLowerCase().includes(searchTerm)
                 );
             });
-            currentPage = 1;
-            renderTable();
-        });
-
-        // Toggle advanced search
-        toggleAdvancedSearchBtn.addEventListener('click', function() {
-            if (advancedSearchSection.style.display === 'none') {
-                advancedSearchSection.style.display = 'block';
-                this.innerHTML = '<i class="bi bi-funnel-fill me-1"></i> Sembunyikan Pencarian Lanjutan';
-            } else {
-                advancedSearchSection.style.display = 'none';
-                this.innerHTML = '<i class="bi bi-funnel me-1"></i> Pencarian Lanjutan';
-            }
-        });
-
-        // Apply filter
-        applyFilterBtn.addEventListener('click', function() {
-            const dateFrom = document.getElementById('date-from').value;
-            const dateTo = document.getElementById('date-to').value;
-            const statusFilter = document.getElementById('status-filter').value;
-            const marketingFilter = document.getElementById('marketing-filter').value;
-            const requestorFilter = document.getElementById('requestor-filter').value.toLowerCase();
-
-            filteredApplications = applications.filter(app => {
-                let match = true;
-
-                if (dateFrom && app.tanggal < dateFrom) match = false;
-                if (dateTo && app.tanggal > dateTo) match = false;
-                if (statusFilter && app.status !== statusFilter) match = false;
-                if (marketingFilter && app.id_marketing !== marketingFilter) match = false;
-                if (requestorFilter && !app.request_name.toLowerCase().includes(requestorFilter)) match = false;
-
-                return match;
-            });
-
-            currentPage = 1;
-            renderTable();
-        });
-
-        // Reset filter
-        resetFilterBtn.addEventListener('click', function() {
-            document.getElementById('date-from').value = '';
-            document.getElementById('date-to').value = '';
-            document.getElementById('status-filter').value = '';
-            document.getElementById('marketing-filter').value = '';
-            document.getElementById('requestor-filter').value = '';
-            
-            filteredApplications = [...applications];
-            currentPage = 1;
-            renderTable();
-        });
-
-        // Add button
-        addBtn.addEventListener('click', function() {
-            formModalLabel.textContent = 'Tambah Aplikasi';
-            applicationForm.reset();
-            document.getElementById('id').value = '';
-            document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
-            document.getElementById('created_at').value = new Date().toISOString().slice(0, 19).replace('T', ' ');
-            document.getElementById('updated_at').value = new Date().toISOString().slice(0, 19).replace('T', ' ');
-            formModal.show();
-        });
-
-        // Print button
-        cetakBtn.addEventListener('click', function() {
-            window.print();
-        });
-
-        // Save form
-        saveFormBtn.addEventListener('click', function() {
-            if (applicationForm.checkValidity()) {
-                const formData = new FormData(applicationForm);
-                const id = formData.get('id');
-                
-                if (id) {
-                    // Edit existing application
-                    const index = applications.findIndex(app => app.id == id);
-                    if (index !== -1) {
-                        applications[index] = {
-                            ...applications[index],
-                            type_business: formData.get('type_business'),
-                            id_marketing: formData.get('id_marketing'),
-                            segment: formData.get('segment'),
-                            request_type: formData.get('request_type'),
-                            request_name: formData.get('request_name'),
-                            uraian: formData.get('uraian'),
-                            ex_polis: formData.get('ex_polis'),
-                            'no-request': formData.get('no-request'),
-                            no_polis: formData.get('no_polis'),
-                            status: formData.get('status'),
-                            keterangan: formData.get('keterangan'),
-                            updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
-                        };
-                    }
-                } else {
-                    // Add new application
-                    const newId = Math.max(...applications.map(app => app.id)) + 1;
-                    const newApplication = {
-                        id: newId,
-                        tanggal: formData.get('tanggal'),
-                        type_business: formData.get('type_business'),
-                        id_marketing: formData.get('id_marketing'),
-                        segment: formData.get('segment'),
-                        request_type: formData.get('request_type'),
-                        request_name: formData.get('request_name'),
-                        uraian: formData.get('uraian'),
-                        ex_polis: formData.get('ex_polis'),
-                        'no-request': formData.get('no-request'),
-                        no_polis: formData.get('no_polis'),
-                        status: formData.get('status'),
-                        keterangan: formData.get('keterangan'),
-                        created_at: formData.get('created_at'),
-                        updated_at: formData.get('updated_at')
-                    };
-                    applications.push(newApplication);
-                }
-                
-                filteredApplications = [...applications];
-                renderTable();
-                updateStats();
-                formModal.hide();
-            } else {
-                applicationForm.reportValidity();
-            }
-        });
-
-        // Confirm delete
-        confirmDeleteBtn.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            applications = applications.filter(app => app.id != id);
-            filteredApplications = [...applications];
-            renderTable();
-            updateStats();
-            deleteModal.hide();
-        });
-    }
-
-    // Render table
-    function renderTable() {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const paginatedApplications = filteredApplications.slice(startIndex, endIndex);
-
-        tableBody.innerHTML = '';
-        
-        if (paginatedApplications.length === 0) {
-            const row = document.createElement('tr');
-            row.innerHTML = '<td colspan="13" class="text-center">Tidak ada data yang tersedia</td>';
-            tableBody.appendChild(row);
         } else {
-            paginatedApplications.forEach(app => {
-                const row = document.createElement('tr');
-                
-                // Create status badge class
-                let statusClass = '';
-                if (app.status === 'Realisasi') statusClass = 'status-realisasi';
-                else if (app.status === 'Pending') statusClass = 'status-pending';
-                else if (app.status === 'Batal') statusClass = 'status-batal';
-                
-                row.innerHTML = `
-                    <td>
-                        <button class="action-btn view" data-id="${app.id}" data-action="view">
-                            <i class="bi bi-eye"></i> View
-                        </button>
-                        <button class="action-btn edit" data-id="${app.id}" data-action="edit">
-                            <i class="bi bi-pencil"></i> Edit
-                        </button>
-                        <button class="action-btn delete" data-id="${app.id}" data-action="delete">
-                            <i class="bi bi-trash"></i> Delete
-                        </button>
-                    </td>
-                    <td>${app.tanggal}</td>
-                    <td>${app.type_business}</td>
-                    <td>Marketing ${app.id_marketing}</td>
-                    <td>${app.segment}</td>
-                    <td>${app.request_type}</td>
-                    <td>${app.request_name}</td>
-                    <td>${app.uraian.substring(0, 30)}${app.uraian.length > 30 ? '...' : ''}</td>
-                    <td>${app.ex_polis}</td>
-                    <td>${app['no-request']}</td>
-                    <td>${app.no_polis}</td>
-                    <td><span class="status-badge ${statusClass}">${app.status}</span></td>
-                    <td>${app.keterangan.substring(0, 30)}${app.keterangan.length > 30 ? '...' : ''}</td>
-                `;
-                
-                tableBody.appendChild(row);
-            });
-            
-            // Add event listeners to action buttons
-            document.querySelectorAll('.action-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    const action = this.getAttribute('data-action');
-                    
-                    if (action === 'view') {
-                        viewApplication(id);
-                    } else if (action === 'edit') {
-                        editApplication(id);
-                    } else if (action === 'delete') {
-                        deleteApplication(id);
-                    }
-                });
-            });
+            filteredData = [...sampleData];
         }
         
-        // Update pagination
-        renderPagination();
-        updateShowingInfo();
-    }
-
-    // Render pagination
-    function renderPagination() {
-        const totalPages = Math.ceil(filteredApplications.length / itemsPerPage);
-        pagination.innerHTML = '';
+        currentPage = 1;
+        renderTable();
+    });
+    
+    // Add button
+    document.getElementById('addBtn').addEventListener('click', function() {
+        document.getElementById('modalTitle').textContent = 'Tambah Aplikasi Baru';
+        applicationForm.reset();
         
-        // Previous button
-        const prevLi = document.createElement('li');
-        prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-        prevLi.innerHTML = `<a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>`;
-        prevLi.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (currentPage > 1) {
-                currentPage--;
+        // Set current datetime for created_at
+        const now = new Date();
+        const formattedDateTime = now.toISOString().slice(0, 16);
+        document.getElementById('created_at').value = formattedDateTime;
+        document.getElementById('updated_at').value = formattedDateTime;
+        
+        formModal.classList.remove('hidden');
+    });
+    
+    // Close modal
+    document.getElementById('closeModal').addEventListener('click', function() {
+        formModal.classList.add('hidden');
+    });
+    
+    document.getElementById('cancelBtn').addEventListener('click', function() {
+        formModal.classList.add('hidden');
+    });
+    
+    // Close view modal
+    document.getElementById('closeViewModal').addEventListener('click', function() {
+        viewModal.classList.add('hidden');
+    });
+    
+    document.getElementById('closeViewBtn').addEventListener('click', function() {
+        viewModal.classList.add('hidden');
+    });
+    
+    // Delete modal
+    document.getElementById('cancelDelete').addEventListener('click', function() {
+        deleteModal.classList.add('hidden');
+        deleteId = null;
+    });
+    
+    document.getElementById('confirmDelete').addEventListener('click', function() {
+        if (deleteId) {
+            // Find and remove the item
+            const index = filteredData.findIndex(item => item.id === deleteId);
+            if (index !== -1) {
+                filteredData.splice(index, 1);
+                
+                // Also remove from original data
+                const originalIndex = sampleData.findIndex(item => item.id === deleteId);
+                if (originalIndex !== -1) {
+                    sampleData.splice(originalIndex, 1);
+                }
+                
                 renderTable();
             }
-        });
-        pagination.appendChild(prevLi);
+            
+            deleteModal.classList.add('hidden');
+            deleteId = null;
+        }
+    });
+    
+    // Form submit
+    applicationForm.addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        // Page numbers
-        for (let i = 1; i <= totalPages; i++) {
-            const li = document.createElement('li');
-            li.className = `page-item ${i === currentPage ? 'active' : ''}`;
-            li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-            li.addEventListener('click', function(e) {
-                e.preventDefault();
+        const formData = new FormData(applicationForm);
+        const data = {};
+        
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+        
+        // If id exists, update existing record
+        if (data.id) {
+            const index = filteredData.findIndex(item => item.id == data.id);
+            if (index !== -1) {
+                // Update timestamp
+                const now = new Date();
+                data.updated_at = now.toISOString().slice(0, 16).replace('T', ' ');
+                
+                filteredData[index] = { ...filteredData[index], ...data };
+                
+                // Also update in original data
+                const originalIndex = sampleData.findIndex(item => item.id == data.id);
+                if (originalIndex !== -1) {
+                    sampleData[originalIndex] = { ...sampleData[originalIndex], ...data };
+                }
+            }
+        } else {
+            // Add new record
+            const newId = Math.max(...sampleData.map(item => item.id)) + 1;
+            data.id = newId;
+            data.tanggal = new Date().toISOString().slice(0, 10);
+            
+            // Add to both arrays
+            sampleData.push(data);
+            filteredData.push(data);
+        }
+        
+        formModal.classList.add('hidden');
+        renderTable();
+    });
+    
+    // Print button
+    document.getElementById('printBtn').addEventListener('click', function() {
+        window.print();
+    });
+    
+    // Render table
+    function renderTable() {
+        // Calculate pagination
+        const totalPages = Math.ceil(filteredData.length / recordsPerPage);
+        const startIndex = (currentPage - 1) * recordsPerPage;
+        const endIndex = Math.min(startIndex + recordsPerPage, filteredData.length);
+        const displayData = filteredData.slice(startIndex, endIndex);
+        
+        // Clear table
+        tableBody.innerHTML = '';
+        
+        // Add rows
+        displayData.forEach(item => {
+            const row = document.createElement('tr');
+            row.className = 'table-row-hover';
+            
+            // Status badge class
+            let statusClass = '';
+            if (item.status === 'Pending') {
+                statusClass = 'status-pending';
+            } else if (item.status === 'Realisasi') {
+                statusClass = 'status-realisasi';
+            } else if (item.status === 'Batal') {
+                statusClass = 'status-batal';
+            }
+            
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <button class="action-btn view-btn" onclick="viewRecord(${item.id})">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="action-btn edit-btn" onclick="editRecord(${item.id})">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="action-btn delete-btn" onclick="deleteRecord(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.id}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.tanggal}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.type_business}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.id_marketing}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.segment}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.request_type}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-truncate">${item.request_name}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-truncate">${item.uraian}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.ex_polis}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.no_request}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.no_polis}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    <span class="status-badge ${statusClass}">${item.status}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-truncate">${item.keterangan}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.created_at}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.updated_at}</td>
+            `;
+            
+            tableBody.appendChild(row);
+        });
+        
+        // Update pagination info
+        startRecord.textContent = filteredData.length > 0 ? startIndex + 1 : 0;
+        endRecord.textContent = endIndex;
+        totalRecords.textContent = filteredData.length;
+        
+        // Render pagination buttons
+        renderPagination(totalPages);
+    }
+    
+    // Render pagination
+    function renderPagination(totalPages) {
+        pageNumbers.innerHTML = '';
+        
+        // Calculate page range to display
+        let startPage = Math.max(1, currentPage - 2);
+        let endPage = Math.min(totalPages, startPage + 4);
+        
+        if (endPage - startPage < 4) {
+            startPage = Math.max(1, endPage - 4);
+        }
+        
+        // Add page numbers
+        for (let i = startPage; i <= endPage; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.className = `page-number ${i === currentPage ? 'active' : ''}`;
+            pageButton.textContent = i;
+            pageButton.addEventListener('click', function() {
                 currentPage = i;
                 renderTable();
             });
-            pagination.appendChild(li);
+            pageNumbers.appendChild(pageButton);
         }
         
-        // Next button
-        const nextLi = document.createElement('li');
-        nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-        nextLi.innerHTML = `<a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>`;
-        nextLi.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (currentPage < totalPages) {
-                currentPage++;
-                renderTable();
-            }
-        });
-        pagination.appendChild(nextLi);
+        // Previous/Next buttons
+        document.getElementById('prevPage').disabled = currentPage === 1;
+        document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
+        document.getElementById('prevPageMobile').disabled = currentPage === 1;
+        document.getElementById('nextPageMobile').disabled = currentPage === totalPages || totalPages === 0;
     }
-
-    // Update showing info
-    function updateShowingInfo() {
-        const startIndex = (currentPage - 1) * itemsPerPage + 1;
-        const endIndex = Math.min(currentPage * itemsPerPage, filteredApplications.length);
+    
+    // View record
+    window.viewRecord = function(id) {
+        const item = filteredData.find(item => item.id === id);
+        if (!item) return;
         
-        document.getElementById('showing-start').textContent = filteredApplications.length > 0 ? startIndex : 0;
-        document.getElementById('showing-end').textContent = endIndex;
-        document.getElementById('total-records').textContent = filteredApplications.length;
-    }
-
-    // Update stats
-    function updateStats() {
-        const realisasiCount = applications.filter(app => app.status === 'Realisasi').length;
-        const pendingCount = applications.filter(app => app.status === 'Pending').length;
-        const batalCount = applications.filter(app => app.status === 'Batal').length;
+        // Status badge class
+        let statusClass = '';
+        if (item.status === 'Pending') {
+            statusClass = 'status-pending';
+        } else if (item.status === 'Realisasi') {
+            statusClass = 'status-realisasi';
+        } else if (item.status === 'Batal') {
+            statusClass = 'status-batal';
+        }
         
-        document.getElementById('realisasi-count').textContent = realisasiCount;
-        document.getElementById('pending-count').textContent = pendingCount;
-        document.getElementById('batal-count').textContent = batalCount;
-    }
-
-    // View application
-    function viewApplication(id) {
-        const app = applications.find(a => a.id == id);
-        if (app) {
-            let statusClass = '';
-            if (app.status === 'Realisasi') statusClass = 'status-realisasi';
-            else if (app.status === 'Pending') statusClass = 'status-pending';
-            else if (app.status === 'Batal') statusClass = 'status-batal';
-            
-            viewContent.innerHTML = `
-                <div class="row">
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">ID</div>
-                        <div class="view-value">${app.id}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">Tanggal</div>
-                        <div class="view-value">${app.tanggal}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">Type Business</div>
-                        <div class="view-value">${app.type_business}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">Marketing</div>
-                        <div class="view-value">Marketing ${app.id_marketing}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">Segment</div>
-                        <div class="view-value">${app.segment}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">Request Type</div>
-                        <div class="view-value">${app.request_type}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">Request Name</div>
-                        <div class="view-value">${app.request_name}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">Status</div>
-                        <div class="view-value"><span class="status-badge ${statusClass}">${app.status}</span></div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">Ex Polis</div>
-                        <div class="view-value">${app.ex_polis}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">No Request</div>
-                        <div class="view-value">${app['no-request']}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">No Polis</div>
-                        <div class="view-value">${app.no_polis}</div>
-                    </div>
-                    <div class="col-md-12 view-item">
-                        <div class="view-label">Uraian</div>
-                        <div class="view-value">${app.uraian}</div>
-                    </div>
-                    <div class="col-md-12 view-item">
-                        <div class="view-label">Keterangan</div>
-                        <div class="view-value">${app.keterangan}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">Created At</div>
-                        <div class="view-value">${app.created_at}</div>
-                    </div>
-                    <div class="col-md-6 view-item">
-                        <div class="view-label">Updated At</div>
-                        <div class="view-value">${app.updated_at}</div>
-                    </div>
-                </div>
-            `;
-            viewModal.show();
+        viewContent.innerHTML = `
+            <table class="min-w-full divide-y divide-gray-200">
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-1/3">ID</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.id}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Tanggal</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.tanggal}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Type Business</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.type_business}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ID Marketing</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.id_marketing}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Segment</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.segment}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Request Type</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.request_type}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Request Name</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.request_name}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Uraian</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">${item.uraian}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Ex Polis</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.ex_polis}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">No Request</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.no_request}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">No Polis</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.no_polis}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Status</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <span class="status-badge ${statusClass}">${item.status}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Keterangan</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">${item.keterangan}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Created At</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.created_at}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Updated At</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.updated_at}</td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+        
+        viewModal.classList.remove('hidden');
+    };
+    
+    // Edit record
+    window.editRecord = function(id) {
+        const item = filteredData.find(item => item.id === id);
+        if (!item) return;
+        
+        document.getElementById('modalTitle').textContent = 'Edit Aplikasi';
+        
+        // Fill form with data
+        document.getElementById('id').value = item.id;
+        document.getElementById('tanggal').value = item.tanggal;
+        document.getElementById('type_business').value = item.type_business;
+        document.getElementById('id_marketing').value = item.id_marketing;
+        document.getElementById('segment').value = item.segment;
+        document.getElementById('request_type').value = item.request_type;
+        document.getElementById('request_name').value = item.request_name;
+        document.getElementById('uraian').value = item.uraian;
+        document.getElementById('ex_polis').value = item.ex_polis;
+        document.getElementById('no_request').value = item.no_request;
+        document.getElementById('no_polis').value = item.no_polis;
+        document.getElementById('status').value = item.status;
+        document.getElementById('keterangan').value = item.keterangan;
+        document.getElementById('created_at').value = item.created_at.replace(' ', 'T');
+        document.getElementById('updated_at').value = item.updated_at.replace(' ', 'T');
+        
+        formModal.classList.remove('hidden');
+    };
+    
+    // Delete record
+    window.deleteRecord = function(id) {
+        deleteId = id;
+        deleteModal.classList.remove('hidden');
+    };
+    
+    // Pagination buttons
+    document.getElementById('prevPage').addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable();
         }
-    }
-
-    // Edit application
-    function editApplication(id) {
-        const app = applications.find(a => a.id == id);
-        if (app) {
-            formModalLabel.textContent = 'Edit Aplikasi';
-            
-            // Fill form with application data
-            document.getElementById('id').value = app.id;
-            document.getElementById('tanggal').value = app.tanggal;
-            document.getElementById('type_business').value = app.type_business;
-            document.getElementById('id_marketing').value = app.id_marketing;
-            document.getElementById('segment').value = app.segment;
-            document.getElementById('request_type').value = app.request_type;
-            document.getElementById('request_name').value = app.request_name;
-            document.getElementById('uraian').value = app.uraian;
-            document.getElementById('ex_polis').value = app.ex_polis;
-            document.getElementById('no-request').value = app['no-request'];
-            document.getElementById('no_polis').value = app.no_polis;
-            document.getElementById('status').value = app.status;
-            document.getElementById('keterangan').value = app.keterangan;
-            document.getElementById('created_at').value = app.created_at;
-            document.getElementById('updated_at').value = new Date().toISOString().slice(0, 19).replace('T', ' ');
-            
-            formModal.show();
+    });
+    
+    document.getElementById('nextPage').addEventListener('click', function() {
+        const totalPages = Math.ceil(filteredData.length / recordsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderTable();
         }
-    }
-
-    // Delete application
-    function deleteApplication(id) {
-        confirmDeleteBtn.setAttribute('data-id', id);
-        deleteModal.show();
-    }
+    });
+    
+    document.getElementById('prevPageMobile').addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+        }
+    });
+    
+    document.getElementById('nextPageMobile').addEventListener('click', function() {
+        const totalPages = Math.ceil(filteredData.length / recordsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderTable();
+        }
+    });
+    
+    // Initial render
+    renderTable();
 });
