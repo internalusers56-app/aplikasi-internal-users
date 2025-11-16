@@ -17,7 +17,6 @@ function initApp() {
     setSidebarCollapsed(false);
   } else {
     setSidebarCollapsed(true);
-    sidebar.classList.add('mobile-open');
   }
   
   // Set active menu based on current hash
