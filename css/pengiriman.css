@@ -1,0 +1,108 @@
+/* Custom styles for pengiriman.html */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 0.25rem;
+}
+
+.status-dikirim {
+    background-color: #DBEAFE;
+    color: #1E40AF;
+}
+
+.status-dalam-perjalanan {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
+.status-terkirim {
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+.action-btn {
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.view-btn {
+    background-color: #EBF8FF;
+    color: #1E40AF;
+}
+
+.view-btn:hover {
+    background-color: #DBEAFE;
+}
+
+.edit-btn {
+    background-color: #F0FDF4;
+    color: #166534;
+}
+
+.edit-btn:hover {
+    background-color: #DCFCE7;
+}
+
+.delete-btn {
+    background-color: #FEF2F2;
+    color: #B91C1C;
+}
+
+.delete-btn:hover {
+    background-color: #FEE2E2;
+}
+
+.page-number {
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #D1D5DB;
+    background-color: #FFFFFF;
+    color: #374151;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.page-number:hover {
+    background-color: #F9FAFB;
+}
+
+.page-number.active {
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    border-color: #3B82F6;
+}
+
+.table-row-hover:hover {
+    background-color: #F9FAFB;
+}
+
+.text-truncate {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .text-truncate {
+        max-width: 100px;
+    }
+}
