@@ -113,19 +113,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update page title
             pageTitle.textContent = menuText;
             
-            // Special handling for Register Aplikasi
+            // Special handling for external HTML pages
             if (pageId === 'register-aplikasi') {
-                // Show loading indicator
-                mainContentArea.innerHTML = `
-                    <div class="flex justify-center items-center h-64">
-                        <div class="text-center">
-                            <i class="fas fa-spinner fa-spin text-4xl text-blue-600 mb-4"></i>
-                            <p class="text-gray-600">Memuat halaman...</p>
-                        </div>
-                    </div>
-                `;
-
-                if (pageId === 'pengiriman-polis') {
                 // Show loading indicator
                 mainContentArea.innerHTML = `
                     <div class="flex justify-center items-center h-64">
@@ -138,6 +127,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Load external HTML
                 await loadExternalHTML('aplikasi.html');
+            } else if (pageId === 'pengiriman') {
+                // Show loading indicator
+                mainContentArea.innerHTML = `
+                    <div class="flex justify-center items-center h-64">
+                        <div class="text-center">
+                            <i class="fas fa-spinner fa-spin text-4xl text-blue-600 mb-4"></i>
+                            <p class="text-gray-600">Memuat halaman...</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Load external HTML
+                await loadExternalHTML('pengiriman.html');
             } else {
                 // Hide all content pages
                 contentPages.forEach(page => {
