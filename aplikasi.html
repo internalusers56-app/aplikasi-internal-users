@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Registrasi Aplikasi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/aplikasi.css">
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Sistem Registrasi Aplikasi</h2>
+            <div class="user-info">
+                <span class="me-2">Admin</span>
+                <i class="bi bi-person-circle fs-4"></i>
+            </div>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+                <div class="card stats-card realisasi-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title">Aplikasi Realisasi</h5>
+                                <h2 class="mb-0" id="realisasi-count">0</h2>
+                            </div>
+                            <div class="stats-icon">
+                                <i class="bi bi-check-circle-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card stats-card pending-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title">Aplikasi Pending</h5>
+                                <h2 class="mb-0" id="pending-count">0</h2>
+                            </div>
+                            <div class="stats-icon">
+                                <i class="bi bi-clock-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card stats-card batal-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title">Aplikasi Batal</h5>
+                                <h2 class="mb-0" id="batal-count">0</h2>
+                            </div>
+                            <div class="stats-icon">
+                                <i class="bi bi-x-circle-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Actions Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-search"></i></span>
+                            <input type="text" class="form-control" id="search-all" placeholder="Cari semua kolom...">
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-outline-primary me-2" id="btn-cetak">
+                            <i class="bi bi-printer me-1"></i> Cetak
+                        </button>
+                        <button class="btn btn-primary" id="btn-add">
+                            <i class="bi bi-plus-circle me-1"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Advanced Search Toggle -->
+                <div class="mt-3">
+                    <button class="btn btn-sm btn-outline-secondary" id="toggle-advanced-search">
+                        <i class="bi bi-funnel me-1"></i> Pencarian Lanjutan
+                    </button>
+                </div>
+
+                <!-- Advanced Search Section -->
+                <div class="advanced-search-section mt-3" id="advanced-search" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label for="date-from" class="form-label">Tanggal Dari</label>
+                            <input type="date" class="form-control" id="date-from">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="date-to" class="form-label">Tanggal Sampai</label>
+                            <input type="date" class="form-control" id="date-to">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="status-filter" class="form-label">Status</label>
+                            <select class="form-select" id="status-filter">
+                                <option value="">Semua Status</option>
+                                <option value="Realisasi">Realisasi</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Batal">Batal</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="marketing-filter" class="form-label">Marketing</label>
+                            <select class="form-select" id="marketing-filter">
+                                <option value="">Semua Marketing</option>
+                                <option value="1">Marketing 1</option>
+                                <option value="2">Marketing 2</option>
+                                <option value="3">Marketing 3</option>
+                                <option value="4">Marketing 4</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="requestor-filter" class="form-label">Nama Requestor</label>
+                            <input type="text" class="form-control" id="requestor-filter" placeholder="Masukkan nama requestor">
+                        </div>
+                        <div class="col-md-6 mb-3 d-flex align-items-end">
+                            <button class="btn btn-primary me-2" id="apply-filter">
+                                <i class="bi bi-check-circle me-1"></i> Terapkan Filter
+                            </button>
+                            <button class="btn btn-outline-secondary" id="reset-filter">
+                                <i class="bi bi-arrow-clockwise me-1"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table Section -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped" id="data-table">
+                        <thead>
+                            <tr>
+                                <th width="120">Aksi</th>
+                                <th>Tanggal</th>
+                                <th>Type Business</th>
+                                <th>Marketing</th>
+                                <th>Segment</th>
+                                <th>Request Type</th>
+                                <th>Request Name</th>
+                                <th>Uraian</th>
+                                <th>Ex Polis</th>
+                                <th>No Request</th>
+                                <th>No Polis</th>
+                                <th>Status</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div class="showing-info">
+                        Menampilkan <span id="showing-start">1</span> - <span id="showing-end">10</span> dari <span id="total-records">0</span> data
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="pagination">
+                            <!-- Pagination will be populated by JavaScript -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add/Edit -->
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModalLabel">Tambah Aplikasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="application-form">
+                        <input type="hidden" id="id" name="id">
+                        <input type="hidden" id="tanggal" name="tanggal">
+                        <input type="hidden" id="created_at" name="created_at">
+                        <input type="hidden" id="updated_at" name="updated_at">
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="type_business" class="form-label">Type Business</label>
+                                <select class="form-select" id="type_business" name="type_business" required>
+                                    <option value="">Pilih Type Business</option>
+                                    <option value="New Business">New Business</option>
+                                    <option value="Endorsment">Endorsment</option>
+                                    <option value="Renewal">Renewal</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_marketing" class="form-label">Marketing</label>
+                                <select class="form-select" id="id_marketing" name="id_marketing" required>
+                                    <option value="">Pilih Marketing</option>
+                                    <option value="1">Marketing 1</option>
+                                    <option value="2">Marketing 2</option>
+                                    <option value="3">Marketing 3</option>
+                                    <option value="4">Marketing 4</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="segment" class="form-label">Segment</label>
+                                <select class="form-select" id="segment" name="segment" required>
+                                    <option value="">Pilih Segment</option>
+                                    <option value="Corporate">Corporate</option>
+                                    <option value="Retail">Retail</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="request_type" class="form-label">Request Type</label>
+                                <select class="form-select" id="request_type" name="request_type" required>
+                                    <option value="">Pilih Request Type</option>
+                                    <option value="Bank">Bank</option>
+                                    <option value="General Corporate">General Corporate</option>
+                                    <option value="Broker">Broker</option>
+                                    <option value="Agent">Agent</option>
+                                    <option value="General Retail">General Retail</option>
+                                    <option value="Leasing">Leasing</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="request_name" class="form-label">Request Name</label>
+                                <input type="text" class="form-control" id="request_name" name="request_name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select" id="status" name="status" required>
+                                    <option value="">Pilih Status</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Realisasi">Realisasi</option>
+                                    <option value="Batal">Batal</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="ex_polis" class="form-label">Ex Polis</label>
+                                <input type="text" class="form-control" id="ex_polis" name="ex_polis">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="no-request" class="form-label">No Request</label>
+                                <input type="text" class="form-control" id="no-request" name="no-request">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="no_polis" class="form-label">No Polis</label>
+                                <input type="text" class="form-control" id="no_polis" name="no_polis">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="uraian" class="form-label">Uraian</label>
+                                <textarea class="form-control" id="uraian" name="uraian" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="keterangan" class="form-label">Keterangan</label>
+                                <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="save-form">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal View -->
+    <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewModalLabel">Detail Aplikasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="view-content">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger" id="confirm-delete">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/aplikasi.js"></script>
+</body>
+</html>
