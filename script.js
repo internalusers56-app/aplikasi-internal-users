@@ -54,7 +54,6 @@ btnSidebarToggle.addEventListener('click', () => {
     const isCollapsed = sidebar.getAttribute('data-state') === 'collapsed';
     setSidebarCollapsed(!isCollapsed);
   } else {
-    // On mobile, sidebar toggle opens/closes the sidebar
     toggleMobileSidebar();
   }
 });
@@ -83,13 +82,8 @@ menuAdminToggle.addEventListener('click', (e) => {
   e.stopPropagation();
   const isOpen = submenuAdmin.classList.contains('hidden');
   
-  // Toggle submenu visibility
   submenuAdmin.classList.toggle('hidden', !isOpen);
-  
-  // Rotate chevron icon
   chevronAdmin.classList.toggle('rotate-90', isOpen);
-  
-  // Update ARIA attributes
   menuAdminToggle.setAttribute('aria-expanded', isOpen.toString());
 });
 
@@ -155,21 +149,17 @@ const contentDesc = document.getElementById('content-description');
 
 // Set active menu based on current route
 function setActiveMenu() {
-  // Remove active class from all menu items
   document.querySelectorAll('.menu-item').forEach(item => {
     item.classList.remove('active');
   });
   
-  // Get current hash
   const hash = window.location.hash || '#/dashboard';
-  
-  // Find corresponding menu item and add active class
   const menuItem = document.querySelector(`a[href="${hash}"]`);
+  
   if (menuItem) {
     menuItem.classList.add('active');
   }
   
-  // If it's an admin submenu, also highlight the parent
   if (hash.includes('/admin/')) {
     menuAdminToggle.classList.add('active');
   }
@@ -180,17 +170,12 @@ function renderRoute() {
   const key = window.location.hash || '#/dashboard';
   const route = routes[key] || routes['#/dashboard'];
   
-  // Update content
   contentTitle.textContent = route.title;
   contentDesc.textContent = route.desc;
-  
-  // Update header title
   document.getElementById('header-title').textContent = route.title;
   
-  // Set active menu
   setActiveMenu();
   
-  // Close mobile sidebar after navigation
   if (window.innerWidth < 1024) {
     sidebar.classList.remove('mobile-open');
     overlay.classList.remove('active');
@@ -201,16 +186,13 @@ function renderRoute() {
 // Handle window resize
 function handleResize() {
   if (window.innerWidth >= 1024) {
-    // On desktop, ensure sidebar is visible
     sidebar.classList.remove('mobile-open');
     overlay.classList.remove('active');
     document.body.classList.remove('overflow-hidden');
     
-    // Set initial sidebar state
     const isCollapsed = sidebar.getAttribute('data-state') === 'collapsed';
     setSidebarCollapsed(isCollapsed);
   } else {
-    // On mobile, ensure main content has no margin
     mainContent.classList.remove('sidebar-expanded', 'sidebar-collapsed');
   }
 }
@@ -222,7 +204,6 @@ btnNotif.addEventListener('click', () => {
   const val = parseInt(notifBadge.textContent || '0', 10);
   notifBadge.textContent = String(val + 1);
   
-  // Add animation effect
   notifBadge.classList.add('badge-pulse');
   setTimeout(() => {
     notifBadge.classList.remove('badge-pulse');
@@ -232,9 +213,6 @@ btnNotif.addEventListener('click', () => {
 // Logout functionality
 document.getElementById('menu-logout').addEventListener('click', () => {
   if (confirm('Apakah Anda yakin ingin keluar?')) {
-    // Simulate logout process
-    console.log('Logging out...');
-    // In a real app, you would redirect to logout endpoint or clear tokens
     alert('Anda telah berhasil logout. Implementasi sesungguhnya akan membersihkan sesi dan mengarahkan ke halaman login.');
   }
 });
@@ -247,7 +225,6 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 window.addEventListener('resize', handleResize);
 
-// Prevent default behavior for admin toggle button
 menuAdminToggle.addEventListener('click', (e) => {
   e.preventDefault();
 });
