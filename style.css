@@ -33,6 +33,12 @@ html, body {
   pointer-events: none;
 }
 
+/* Menu item active state */
+.menu-item.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 3px solid var(--accent-azure);
+}
+
 /* Chevron rotation */
 .rotate-0 { transform: rotate(0deg); }
 .rotate-90 { transform: rotate(90deg); transition: transform 180ms ease; }
@@ -68,11 +74,67 @@ html, body {
     height: 100vh;
     top: 0;
     left: 0;
+    transform: translateX(-100%);
   }
+  
+  #app-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  
   #app-overlay {
-    display: none;
-  }
-  .overlay-show #app-overlay {
     display: block;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
   }
+  
+  #app-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .sidebar-expanded, .sidebar-collapsed {
+    width: 260px;
+  }
+  
+  .collapsed .menu-text {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Content area adjustment for sidebar */
+#main-content {
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  #main-content.sidebar-expanded {
+    margin-left: 260px;
+  }
+  
+  #main-content.sidebar-collapsed {
+    margin-left: 80px;
+  }
+}
+
+/* Smooth transitions */
+.transition-base {
+  transition: all 0.3s ease;
+}
+
+/* Card hover effects */
+#content-router {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#content-router:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Button hover effects */
+button:hover, a:hover {
+  transform: translateY(-1px);
 }
