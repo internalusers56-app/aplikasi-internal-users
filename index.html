@@ -13,11 +13,9 @@
 </head>
 <body class="flex bg-gray-100 h-screen overflow-hidden">
 
-
 <!-- SIDEBAR -->
 <aside id="sidebar" class="sidebar-expanded bg-gray-900 text-gray-200 transition-all duration-300 flex flex-col">
 <div class="p-4 font-bold text-xl tracking-wide border-b border-gray-700">MY APP</div>
-
 
 <!-- MENU LIST -->
 <nav class="flex-1 overflow-y-auto text-sm">
@@ -38,10 +36,8 @@
 </nav>
 </aside>
 
-
 <!-- MAIN AREA -->
 <div class="flex-1 flex flex-col">
-
 
 <!-- TOP BAR -->
 <header class="bg-white h-16 flex items-center justify-between px-6 shadow">
@@ -61,11 +57,25 @@
 </div>
 </header>
 
-
 <main id="contentArea" class="p-6 overflow-auto"></main>
-
 
 </div>
 
+<!-- JAVASCRIPT -->
+<script>
+function loadPage(page, element) {
+    document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active-menu'));
+    if (element) element.classList.add('active-menu');
 
+    fetch(page)
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('contentArea').innerHTML = html;
+            if (element) document.getElementById('pageTitle').innerText = element.querySelector('.menu-text').innerText;
+        })
+        .catch(err => console.error('Gagal memuat halaman:', err));
+}
+</script>
+
+</body>
 </html>
