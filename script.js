@@ -124,6 +124,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 `;
+
+                if (pageId === 'pengiriman-polis') {
+                // Show loading indicator
+                mainContentArea.innerHTML = `
+                    <div class="flex justify-center items-center h-64">
+                        <div class="text-center">
+                            <i class="fas fa-spinner fa-spin text-4xl text-blue-600 mb-4"></i>
+                            <p class="text-gray-600">Memuat halaman...</p>
+                        </div>
+                    </div>
+                `;
                 
                 // Load external HTML
                 await loadExternalHTML('aplikasi.html');
