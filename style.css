@@ -1,0 +1,89 @@
+:root {
+  --navy-900: #0b1b3a;         /* Dongker gelap untuk sidebar & header */
+  --navy-800: #122554;         /* Varian sedikit lebih terang */
+  --pearl-white: #f8f9fb;      /* Putih mutiara untuk content utama */
+  --accent-azure: #3b82f6;     /* Biru aksen untuk hover/badge */
+}
+
+/* Base font */
+html, body {
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  background: var(--pearl-white);
+  color: #111827;
+}
+
+/* Smooth transitions for UI elements */
+.transition-base {
+  transition: all 200ms ease;
+}
+
+/* Sidebar states */
+.sidebar-expanded {
+  width: 260px;
+}
+.sidebar-collapsed {
+  width: 80px;
+}
+
+/* Hide text when collapsed */
+.menu-text {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.collapsed .menu-text {
+  opacity: 0;
+  transform: translateX(-8px);
+  pointer-events: none;
+}
+
+/* Dropdown chevron rotate */
+.rotate-0 { transform: rotate(0deg); }
+.rotate-90 { transform: rotate(90deg); transition: transform 180ms ease; }
+
+/* Hover states */
+.hover-azure:hover {
+  background-color: rgba(59,130,246,0.15);
+}
+
+/* Scrollbar minimal */
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #334155 transparent;
+}
+.thin-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 8px;
+}
+
+/* Badge animation */
+.badge-pulse {
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Responsive helpers */
+@media (max-width: 1024px) {
+  /* On mobile/tablet, sidebar overlays */
+  #app-sidebar {
+    position: fixed;
+    z-index: 40;
+    height: 100vh;
+    top: 0;
+    left: 0;
+  }
+  #app-overlay {
+    display: none;
+  }
+  .overlay-show #app-overlay {
+    display: block;
+  }
+}
