@@ -23,16 +23,12 @@
 
     <!-- Sidebar -->
     <aside id="app-sidebar" class="fixed lg:relative z-40 bg-[var(--navy-900)] text-white transition-all duration-300 flex flex-col h-full" data-state="expanded">
-      <!-- Sidebar header -->
-      <div class="flex items-center justify-between px-4 py-4 border-b border-white/10">
+      <!-- Sidebar header - hanya tombol toggle -->
+      <div class="flex items-center justify-between px-4 py-4">
         <button id="btn-sidebar-toggle" class="flex items-center gap-3 px-3 py-2 hover:bg-white/10 rounded-lg transition-all duration-200">
           <i class="fa-solid fa-bars text-xl"></i>
           <span class="menu-text text-sm font-semibold">Toggle Menu</span>
         </button>
-        <a href="#/dashboard" class="hidden lg:flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded-lg transition-all duration-200">
-          <i class="fa-solid fa-gauge-high text-xl"></i>
-          <span class="menu-text text-sm font-semibold">Dashboard</span>
-        </a>
       </div>
 
       <!-- Sidebar menu -->
@@ -68,7 +64,7 @@
 
     <!-- Main area -->
     <div id="main-content" class="flex-1 flex flex-col min-w-0 transition-all duration-300">
-      <header id="app-header" class="bg-[var(--navy-900)] text-white border-b border-white/10">
+      <header id="app-header" class="bg-[var(--navy-900)] text-white">
         <div class="flex items-center justify-between px-4 py-3">
           <div id="header-title" class="text-sm lg:text-base font-semibold">Overview</div>
           <div id="header-user" class="flex items-center gap-3">
