@@ -41,9 +41,61 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuItems = document.querySelectorAll('.sidebar-item');
     const contentPages = document.querySelectorAll('.content-page');
     const pageTitle = document.getElementById('pageTitle');
+    const mainContentArea = document.querySelector('main');
+    
+    // Function to load external HTML
+    async function loadExternalHTML(filePath) {
+        try {
+            const response = await fetch(filePath);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const html = await response.text();
+            
+            // Create a temporary div to parse the HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            
+            // Extract the content from the loaded HTML
+            const content = tempDiv.querySelector('#external-content') || tempDiv;
+            
+            // Clear main content and append new content
+            mainContentArea.innerHTML = '';
+            mainContentArea.appendChild(content);
+            
+            // Execute any scripts in the loaded content
+            const scripts = tempDiv.querySelectorAll('script');
+            scripts.forEach(script => {
+                const newScript = document.createElement('script');
+                if (script.src) {
+                    newScript.src = script.src;
+                } else {
+                    newScript.textContent = script.textContent;
+                }
+                document.body.appendChild(newScript);
+            });
+            
+            return true;
+        } catch (error) {
+            console.error('Error loading external HTML:', error);
+            mainContentArea.innerHTML = `
+                <div class="card bg-white rounded-lg p-8 max-w-md mx-auto mt-20">
+                    <div class="text-center">
+                        <i class="fas fa-exclamation-triangle text-6xl text-yellow-500 mb-4"></i>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Error Loading Content</h2>
+                        <p class="text-gray-600 mb-6">Gagal memuat halaman. Silakan coba lagi.</p>
+                        <button onclick="location.reload()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                            <i class="fas fa-redo mr-2"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+            `;
+            return false;
+        }
+    }
     
     menuItems.forEach(item => {
-        item.addEventListener('click', function(e) {
+        item.addEventListener('click', async function(e) {
             e.preventDefault();
             
             // Remove active class from all menu items
@@ -56,20 +108,36 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Get the page ID from data attribute
             const pageId = this.getAttribute('data-page');
+            const menuText = this.querySelector('.menu-text').textContent;
             
-            // Hide all content pages
-            contentPages.forEach(page => {
-                page.classList.remove('active');
-            });
+            // Update page title
+            pageTitle.textContent = menuText;
             
-            // Show the selected content page
-            const selectedPage = document.getElementById(pageId);
-            if (selectedPage) {
-                selectedPage.classList.add('active');
+            // Special handling for Register Aplikasi
+            if (pageId === 'register-aplikasi') {
+                // Show loading indicator
+                mainContentArea.innerHTML = `
+                    <div class="flex justify-center items-center h-64">
+                        <div class="text-center">
+                            <i class="fas fa-spinner fa-spin text-4xl text-blue-600 mb-4"></i>
+                            <p class="text-gray-600">Memuat halaman...</p>
+                        </div>
+                    </div>
+                `;
                 
-                // Update page title
-                const menuText = this.querySelector('.menu-text').textContent;
-                pageTitle.textContent = menuText;
+                // Load external HTML
+                await loadExternalHTML('aplikasi.html');
+            } else {
+                // Hide all content pages
+                contentPages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show the selected content page
+                const selectedPage = document.getElementById(pageId);
+                if (selectedPage) {
+                    selectedPage.classList.add('active');
+                }
             }
             
             // Close mobile menu if open
