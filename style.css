@@ -5,7 +5,7 @@
   --accent-azure: #3b82f6;
 }
 
-/* RESET RADICAL - HILANGKAN SEMUA GAP POTENSIAL */
+/* COMPLETE RESET - NO GAPS ANYWHERE */
 * {
   margin: 0;
   padding: 0;
@@ -38,7 +38,7 @@ html, body {
   line-height: 1;
 }
 
-/* Sidebar - TANPA GAP SEDIKITPUN */
+/* Sidebar - ABSOLUTELY NO GAP */
 #app-sidebar {
   flex-shrink: 0;
   height: 100vh;
@@ -104,16 +104,17 @@ html, body {
   100% { transform: scale(1); }
 }
 
-/* MAIN CONTENT - ZERO GAP DENGAN SIDEBAR */
+/* MAIN CONTENT - PERFECT ALIGNMENT WITH SIDEBAR */
 #main-content {
   margin: 0;
   padding: 0;
   width: 100%;
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
-/* Desktop: Sidebar dan Main Content MENYENTUH tanpa celah */
+/* DESKTOP: PERFECT ZERO GAP LAYOUT */
 @media (min-width: 1024px) {
   #app {
     display: flex;
@@ -134,18 +135,18 @@ html, body {
     width: 100%;
   }
   
-  /* PERHITUNGAN YANG PRESISI - TANPA GAP */
-  #main-content.sidebar-expanded {
+  /* PRECISE CALCULATION - NO GAPS */
+  .sidebar-expanded + #main-content {
     margin-left: 260px;
     width: calc(100% - 260px);
   }
   
-  #main-content.sidebar-collapsed {
+  .sidebar-collapsed + #main-content {
     margin-left: 80px;
     width: calc(100% - 80px);
   }
   
-  /* Header langsung menempel dengan sidebar */
+  /* Header perfectly aligns with sidebar */
   #app-header {
     margin: 0;
     padding: 0;
@@ -157,15 +158,20 @@ html, body {
     margin: 0;
   }
   
-  /* Content langsung menempel dengan header */
+  /* Content perfectly aligns with header */
   #app-content {
     margin: 0;
     padding: 0;
     width: 100%;
   }
+  
+  /* HIDE MOBILE MENU BUTTON ON DESKTOP */
+  #btn-mobile-menu {
+    display: none !important;
+  }
 }
 
-/* Mobile: Sidebar menjadi overlay */
+/* MOBILE: Sidebar as overlay */
 @media (max-width: 1023px) {
   #app-sidebar {
     position: fixed;
@@ -202,14 +208,14 @@ html, body {
     transform: translateX(0);
   }
   
-  /* Di mobile, main content full width */
+  /* On mobile, main content full width */
   #main-content {
     width: 100% !important;
     margin-left: 0 !important;
   }
 }
 
-/* HILANGKAN SEMUA BORDER DAN OUTLINE YANG MEMBUAT GAP */
+/* REMOVE ALL BORDERS AND OUTLINES THAT CREATE GAPS */
 #app-header {
   border: none !important;
   outline: none !important;
@@ -245,15 +251,28 @@ button:hover, a:hover {
   transform: translateY(-1px);
 }
 
-/* FIX UNTUK FLEXBOX GAP YANG TERSEMBUNYI */
+/* FIX FOR HIDDEN FLEXBOX GAPS */
 #app {
   gap: 0 !important;
   row-gap: 0 !important;
   column-gap: 0 !important;
 }
 
-/* HILANGKAN SEMUA WHITESPACE DAN LINE-HEIGHT YANG MEMBUAT GAP */
+/* REMOVE ALL WHITESPACE AND LINE-HEIGHT GAPS */
 #app > * {
   line-height: 1;
   vertical-align: top;
+}
+
+/* SPECIFIC FIX FOR DESKTOP GAP ISSUE */
+@media (min-width: 1024px) {
+  #app-sidebar, #main-content {
+    float: left;
+  }
+  
+  #app::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
