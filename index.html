@@ -1,377 +1,81 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Manajemen Asuransi</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>SPA Main Layout</title>
+    <style>
+        .sidebar-collapsed { width: 70px; }
+        .sidebar-expanded { width: 240px; }
+        .active-menu { background-color: rgba(59,130,246,0.15); }
+    </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar bg-slate-800 text-white w-64 min-h-screen fixed left-0 top-0 z-40 transition-all duration-300">
-        <div class="sidebar-header p-6 flex items-center justify-between">
-            <h2 class="text-xl font-bold">Asuransi App</h2>
-            <button id="sidebarToggle" class="text-white hover:bg-slate-700 p-2 rounded-md">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        
-        <nav class="mt-6">
-            <ul class="space-y-2 px-3">
-                <li>
-                    <a href="#" data-menu-id="ID-001" data-page="dashboard" class="sidebar-item flex items-center px-4 py-3 rounded-md active">
-                        <i class="menu-icon fas fa-tachometer-alt mr-3"></i>
-                        <span class="menu-text">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-002" data-page="todolist" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-list-check mr-3"></i>
-                        <span class="menu-text">Todolist</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-003" data-page="simulasi-premi" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-calculator mr-3"></i>
-                        <span class="menu-text">Simulasi Premi</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-004" data-page="marketing-plan" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-chart-line mr-3"></i>
-                        <span class="menu-text">Marketing Plan</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-005" data-page="register-aplikasi" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-file-alt mr-3"></i>
-                        <span class="menu-text">Register Aplikasi</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-013" data-page="pengiriman" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-shipping-fast mr-3"></i>
-                        <span class="menu-text">Data Pengiriman</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-006" data-page="pengiriman-polis" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-truck mr-3"></i>
-                        <span class="menu-text">Pengiriman Polis Asuransi</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-007" data-page="register-klaim" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-clipboard-check mr-3"></i>
-                        <span class="menu-text">Register Klaim</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-008" data-page="pengaturan-users" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-users-cog mr-3"></i>
-                        <span class="menu-text">Pengaturan - Users</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-009" data-page="pengaturan-role" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-user-tag mr-3"></i>
-                        <span class="menu-text">Pengaturan - Role</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-010" data-page="pengaturan-menu" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-bars-cog mr-3"></i>
-                        <span class="menu-text">Pengaturan - Menu</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-011" data-page="profile" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-user-circle mr-3"></i>
-                        <span class="menu-text">Profile</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-menu-id="ID-012" data-page="logout" class="sidebar-item flex items-center px-4 py-3 rounded-md">
-                        <i class="menu-icon fas fa-sign-out-alt mr-3"></i>
-                        <span class="menu-text">Log Out</span>
-                    </a>
-                </li>
+<body class="flex bg-gray-100 h-screen overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar-expanded bg-gray-900 text-gray-200 transition-all duration-300 flex flex-col">
+        <div class="p-4 font-bold text-xl tracking-wide border-b border-gray-700">MY APP</div>
+
+        <!-- MENU LIST -->
+        <nav class="flex-1 overflow-y-auto text-sm">
+            <ul>
+                <li data-id="ID-001" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800" onclick="loadPage('dashboard.html', this)"><span>📊</span><span class="menu-text">Dashboard</span></li>
+                <li data-id="ID-002" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800" onclick="loadPage('todolist.html', this)"><span>📝</span><span class="menu-text">Todolist</span></li>
+                <li data-id="ID-003" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800"><span>💰</span><span class="menu-text">Simulasi Premi</span></li>
+                <li data-id="ID-004" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800"><span>📈</span><span class="menu-text">Marketing Plan</span></li>
+                <li data-id="ID-005" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800"><span>🗂️</span><span class="menu-text">Register Aplikasi</span></li>
+                <li data-id="ID-006" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800"><span>📦</span><span class="menu-text">Pengiriman Polis Asuransi</span></li>
+                <li data-id="ID-007" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800"><span>⚕️</span><span class="menu-text">Register Klaim</span></li>
+                <li data-id="ID-008" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800"><span>👤</span><span class="menu-text">Users</span></li>
+                <li data-id="ID-009" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800"><span>🔐</span><span class="menu-text">Role</span></li>
+                <li data-id="ID-010" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800"><span>📝</span><span class="menu-text">Menu</span></li>
+                <li data-id="ID-011" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800"><span>👥</span><span class="menu-text">Profile</span></li>
+                <li data-id="ID-012" class="menu-item p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-800"><span>🚪</span><span class="menu-text">Log Out</span></li>
             </ul>
         </nav>
     </aside>
-    
-    <!-- Main Content -->
-    <div class="main-content ml-64 min-h-screen">
-        <!-- Header -->
-        <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
-            <div class="flex items-center justify-between px-6 py-4">
-                <div class="flex items-center">
-                    <button class="mobile-menu-toggle hidden mr-4 text-gray-600 hover:text-gray-900" id="mobileMenuToggle">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                    <h1 id="pageTitle" class="text-2xl font-bold text-gray-800">Dashboard</h1>
+
+    <!-- MAIN AREA -->
+    <div class="flex-1 flex flex-col">
+
+        <!-- TOP BAR -->
+        <header class="bg-white h-16 flex items-center justify-between px-6 shadow">
+            <div id="pageTitle" class="text-xl font-bold">Dashboard</div>
+            <div class="flex items-center gap-6">
+                <div class="relative cursor-pointer">
+                    <span class="text-2xl">🔔</span>
+                    <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-1 rounded">3</span>
                 </div>
-                
-                <div class="flex items-center space-x-4">
-                    <!-- Notification -->
-                    <div class="relative">
-                        <button class="text-gray-600 hover:text-gray-900 relative">
-                            <i class="fas fa-bell text-xl"></i>
-                            <span class="notification-dot">3</span>
-                        </button>
-                    </div>
-                    
-                    <!-- User Account -->
-                    <div class="relative">
-                        <button id="userDropdownToggle" class="flex items-center space-x-3 text-gray-700 hover:text-gray-900 focus:outline-none">
-                            <img src="https://picsum.photos/seed/user123/40/40.jpg" alt="User Profile" class="w-10 h-10 rounded-full object-cover">
-                            <div class="hidden md:block text-left">
-                                <p class="text-sm font-medium">Ahmad Wijaya</p>
-                                <p class="text-xs text-gray-500">Admin</p>
-                            </div>
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                        
-                        <div id="userDropdown" class="dropdown-menu">
-                            <a href="#" class="dropdown-item flex items-center text-gray-700 hover:text-blue-600">
-                                <i class="fas fa-user-circle mr-3"></i> Profile
-                            </a>
-                            <a href="#" class="dropdown-item flex items-center text-gray-700 hover:text-blue-600">
-                                <i class="fas fa-sign-out-alt mr-3"></i> Log Out
-                            </a>
-                        </div>
+                <div class="flex items-center gap-3 cursor-pointer">
+                    <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full" />
+                    <div>
+                        <div class="font-semibold">John Doe</div>
+                        <div class="text-xs text-gray-500">Admin</div>
                     </div>
                 </div>
             </div>
         </header>
-        
-        <!-- Page Content -->
-        <main class="p-6">
-            <!-- Dashboard Page -->
-            <div id="dashboard" class="content-page active">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                    <div class="card bg-white rounded-lg p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-500 text-sm font-medium">Total Polis</h3>
-                            <div class="bg-blue-100 p-3 rounded-full">
-                                <i class="fas fa-file-contract text-blue-600"></i>
-                            </div>
-                        </div>
-                        <p class="text-2xl font-bold text-gray-800">1,245</p>
-                        <p class="text-xs text-green-600 mt-2">
-                            <i class="fas fa-arrow-up mr-1"></i> 12% dari bulan lalu
-                        </p>
-                    </div>
-                    
-                    <div class="card bg-white rounded-lg p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-500 text-sm font-medium">Klaim Diproses</h3>
-                            <div class="bg-amber-100 p-3 rounded-full">
-                                <i class="fas fa-clipboard-list text-amber-600"></i>
-                            </div>
-                        </div>
-                        <p class="text-2xl font-bold text-gray-800">87</p>
-                        <p class="text-xs text-red-600 mt-2">
-                            <i class="fas fa-arrow-down mr-1"></i> 5% dari bulan lalu
-                        </p>
-                    </div>
-                    
-                    <div class="card bg-white rounded-lg p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-500 text-sm font-medium">Total Premi</h3>
-                            <div class="bg-green-100 p-3 rounded-full">
-                                <i class="fas fa-dollar-sign text-green-600"></i>
-                            </div>
-                        </div>
-                        <p class="text-2xl font-bold text-gray-800">Rp 2.4M</p>
-                        <p class="text-xs text-green-600 mt-2">
-                            <i class="fas fa-arrow-up mr-1"></i> 18% dari bulan lalu
-                        </p>
-                    </div>
-                    
-                    <div class="card bg-white rounded-lg p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-500 text-sm font-medium">Nasabah Baru</h3>
-                            <div class="bg-purple-100 p-3 rounded-full">
-                                <i class="fas fa-user-plus text-purple-600"></i>
-                            </div>
-                        </div>
-                        <p class="text-2xl font-bold text-gray-800">42</p>
-                        <p class="text-xs text-green-600 mt-2">
-                            <i class="fas fa-arrow-up mr-1"></i> 8% dari bulan lalu
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="card bg-white rounded-lg p-6">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Grafik Penjualan</h3>
-                        <div class="h-64 flex items-center justify-center bg-gray-50 rounded">
-                            <p class="text-gray-500">Grafik Penjualan akan ditampilkan di sini</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card bg-white rounded-lg p-6">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Aktivitas Terkini</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="bg-blue-100 p-2 rounded-full mr-3">
-                                    <i class="fas fa-file-alt text-blue-600 text-xs"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium">Polis baru dibuat</p>
-                                    <p class="text-xs text-gray-500">POL-2023-0842 - 2 jam yang lalu</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="bg-green-100 p-2 rounded-full mr-3">
-                                    <i class="fas fa-check-circle text-green-600 text-xs"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium">Klaim disetujui</p>
-                                    <p class="text-xs text-gray-500">KLM-2023-0156 - 5 jam yang lalu</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="bg-amber-100 p-2 rounded-full mr-3">
-                                    <i class="fas fa-user-plus text-amber-600 text-xs"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium">Nasabah baru terdaftar</p>
-                                    <p class="text-xs text-gray-500">PT. Maju Bersama - 1 hari yang lalu</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Register Aplikasi Page (Empty - will be loaded from aplikasi.html) -->
-            <div id="register-aplikasi" class="content-page">
-                <!-- Content will be loaded from aplikasi.html when menu is clicked -->
-            </div>
-            
-            <!-- Pengiriman Page (Empty - will be loaded from pengiriman.html) -->
-            <div id="pengiriman" class="content-page">
-                <!-- Content will be loaded from pengiriman.html when menu is clicked -->
-            </div>
-            
-            <!-- Other pages remain the same... -->
-            <!-- Todolist Page -->
-            <div id="todolist" class="content-page">
-                <div class="card bg-white rounded-lg p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-xl font-bold text-gray-800">Daftar Tugas</h2>
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center">
-                            <i class="fas fa-plus mr-2"></i> Tambah Tugas
-                        </button>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                            <div class="flex items-start">
-                                <input type="checkbox" class="mt-1 mr-3" id="task1">
-                                <div class="flex-1">
-                                    <label for="task1" class="font-medium text-gray-800 cursor-pointer">Follow up nasabah PT. Sejahtera</label>
-                                    <div class="flex items-center mt-2 text-sm text-gray-500">
-                                        <i class="far fa-calendar mr-1"></i> <span>Due: 25 Juni 2023</span>
-                                        <span class="mx-2">•</span>
-                                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">Prioritas Tinggi</span>
-                                    </div>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <button class="text-gray-400 hover:text-blue-600">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="text-gray-400 hover:text-red-600">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Other static pages... -->
-            <div id="simulasi-premi" class="content-page">
-                <div class="card bg-white rounded-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Simulasi Premi Asuransi</h2>
-                    <p class="text-gray-600">Halaman simulasi premi akan segera tersedia.</p>
-                </div>
-            </div>
-            
-            <div id="marketing-plan" class="content-page">
-                <div class="card bg-white rounded-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Marketing Plan</h2>
-                    <p class="text-gray-600">Halaman marketing plan akan segera tersedia.</p>
-                </div>
-            </div>
-            
-            <div id="pengiriman-polis" class="content-page">
-                <div class="card bg-white rounded-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Pengiriman Polis Asuransi</h2>
-                    <p class="text-gray-600">Halaman pengiriman polis akan segera tersedia.</p>
-                </div>
-            </div>
-            
-            <div id="register-klaim" class="content-page">
-                <div class="card bg-white rounded-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Register Klaim</h2>
-                    <p class="text-gray-600">Halaman register klaim akan segera tersedia.</p>
-                </div>
-            </div>
-            
-            <div id="pengaturan-users" class="content-page">
-                <div class="card bg-white rounded-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Pengaturan - Users</h2>
-                    <p class="text-gray-600">Halaman pengaturan users akan segera tersedia.</p>
-                </div>
-            </div>
-            
-            <div id="pengaturan-role" class="content-page">
-                <div class="card bg-white rounded-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Pengaturan - Role</h2>
-                    <p class="text-gray-600">Halaman pengaturan role akan segera tersedia.</p>
-                </div>
-            </div>
-            
-            <div id="pengaturan-menu" class="content-page">
-                <div class="card bg-white rounded-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Pengaturan - Menu</h2>
-                    <p class="text-gray-600">Halaman pengaturan menu akan segera tersedia.</p>
-                </div>
-            </div>
-            
-            <div id="profile" class="content-page">
-                <div class="card bg-white rounded-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Profil Pengguna</h2>
-                    <p class="text-gray-600">Halaman profil akan segera tersedia.</p>
-                </div>
-            </div>
-            
-            <div id="logout" class="content-page">
-                <div class="card bg-white rounded-lg p-8 max-w-md mx-auto mt-20">
-                    <div class="text-center">
-                        <i class="fas fa-sign-out-alt text-6xl text-red-500 mb-4"></i>
-                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Konfirmasi Logout</h2>
-                        <p class="text-gray-600 mb-6">Apakah Anda yakin ingin keluar dari sistem?</p>
-                        <div class="flex justify-center space-x-3">
-                            <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg">
-                                Batal
-                            </button>
-                            <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg">
-                                <i class="fas fa-sign-out-alt mr-2"></i> Keluar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+
+        <main id="contentArea" class="p-6 overflow-auto"></main>
+
     </div>
-    
-    <script src="script.js"></script>
+
+<script>
+function loadPage(page, element) {
+    document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active-menu'));
+    element.classList.add('active-menu');
+
+    fetch(page)
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('contentArea').innerHTML = html;
+            document.getElementById('pageTitle').innerText = element.querySelector('.menu-text').innerText;
+        });
+}
+
+window.onload = () => loadPage('dashboard.html', document.querySelector('[data-id="ID-001"]'));
+</script>
+
 </body>
 </html>
