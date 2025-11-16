@@ -1,20 +1,15 @@
 :root {
-  --navy-900: #0b1b3a;         /* Dongker gelap untuk sidebar & header */
-  --navy-800: #122554;         /* Varian sedikit lebih terang */
-  --pearl-white: #f8f9fb;      /* Putih mutiara untuk content utama */
-  --accent-azure: #3b82f6;     /* Biru aksen untuk hover/badge */
+  --navy-900: #0b1b3a;
+  --navy-800: #122554;
+  --pearl-white: #f8f9fb;
+  --accent-azure: #3b82f6;
 }
 
-/* Base font */
+/* Font & base */
 html, body {
-  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-  background: var(--pearl-white);
+  font-family: 'Inter', sans-serif;
+  background-color: var(--pearl-white);
   color: #111827;
-}
-
-/* Smooth transitions for UI elements */
-.transition-base {
-  transition: all 200ms ease;
 }
 
 /* Sidebar states */
@@ -25,8 +20,9 @@ html, body {
   width: 80px;
 }
 
-/* Hide text when collapsed */
+/* Menu text visibility */
 .menu-text {
+  color: white;
   opacity: 1;
   transform: translateX(0);
   transition: opacity 180ms ease, transform 180ms ease;
@@ -37,30 +33,24 @@ html, body {
   pointer-events: none;
 }
 
-/* Dropdown chevron rotate */
+/* Chevron rotation */
 .rotate-0 { transform: rotate(0deg); }
 .rotate-90 { transform: rotate(90deg); transition: transform 180ms ease; }
 
-/* Hover states */
-.hover-azure:hover {
-  background-color: rgba(59,130,246,0.15);
-}
-
-/* Scrollbar minimal */
+/* Scrollbar */
 .thin-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #334155 transparent;
 }
 .thin-scrollbar::-webkit-scrollbar {
   width: 8px;
-  height: 8px;
 }
 .thin-scrollbar::-webkit-scrollbar-thumb {
   background: #334155;
   border-radius: 8px;
 }
 
-/* Badge animation */
+/* Notification badge pulse */
 .badge-pulse {
   animation: pulse 1.8s ease-in-out infinite;
 }
@@ -70,9 +60,8 @@ html, body {
   100% { transform: scale(1); }
 }
 
-/* Responsive helpers */
+/* Responsive sidebar overlay */
 @media (max-width: 1024px) {
-  /* On mobile/tablet, sidebar overlays */
   #app-sidebar {
     position: fixed;
     z-index: 40;
