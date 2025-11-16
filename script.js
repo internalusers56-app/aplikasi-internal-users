@@ -23,8 +23,11 @@ function initApp() {
   setActiveMenu();
 }
 
-// Toggle sidebar (desktop)
+// Toggle sidebar (desktop) - ENHANCED FOR GAP PREVENTION
 function setSidebarCollapsed(collapsed) {
+  // Force reflow to prevent layout gaps
+  document.body.classList.add('no-transition');
+  
   if (collapsed) {
     sidebar.classList.add('sidebar-collapsed', 'collapsed');
     sidebar.classList.remove('sidebar-expanded');
@@ -46,6 +49,14 @@ function setSidebarCollapsed(collapsed) {
       mainContent.classList.remove('sidebar-collapsed');
     }
   }
+  
+  // Force browser reflow
+  void sidebar.offsetWidth;
+  
+  // Restore transitions
+  setTimeout(() => {
+    document.body.classList.remove('no-transition');
+  }, 50);
 }
 
 // Toggle sidebar on desktop
@@ -183,8 +194,11 @@ function renderRoute() {
   }
 }
 
-// Handle window resize
+// Handle window resize with gap prevention
 function handleResize() {
+  // Force reflow to prevent gaps during resize
+  void sidebar.offsetWidth;
+  
   if (window.innerWidth >= 1024) {
     sidebar.classList.remove('mobile-open');
     overlay.classList.remove('active');
@@ -228,3 +242,12 @@ window.addEventListener('resize', handleResize);
 menuAdminToggle.addEventListener('click', (e) => {
   e.preventDefault();
 });
+
+// Add CSS to prevent transition during initialization
+const style = document.createElement('style');
+style.textContent = `
+  .no-transition * {
+    transition: none !important;
+  }
+`;
+document.head.appendChild(style);
